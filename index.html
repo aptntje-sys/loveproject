@@ -1,0 +1,169 @@
+Enter<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بدايتنا ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #4b001a 0%, #800020 100%);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #login-screen, #main-content {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        #main-content { display: none; position: relative; }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 50px;
+            border: none;
+            text-align: center;
+            font-size: 18px;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 40px;
+            border-radius: 50px;
+            border: none;
+            background: #ff4d6d;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { transform: scale(1.05); background: #ff758c; }
+
+        .time-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffb3c1;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 20px;
+            filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
+        }
+
+        .heart {
+            position: fixed;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: moveHearts 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveHearts {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <h2 style="font-size: 28px;">جاهزة؟ 😉</h2>
+        <p>Password: love</p> <input type="password" id="passwordInput" placeholder="اكتبي الباسوورد">
+        <br>
+        <button onclick="checkPassword()">Unlock 🔓</button>
+    </div>
+
+    <div id="main-content">
+        <h2>كل ثانية بتعدي وانتي في قلبي ❤️</h2>
+        
+        <div class="time-container">
+            <div class="time-box"><span id="days">0</span> يوم</div>
+            <div class="time-box"><span id="hours">0</span> ساعة</div>
+            <div class="time-box"><span id="minutes">0</span> دقيقة</div>
+            <div class="time-box"><span id="seconds">0</span> ثانية</div>
+        </div>
+
+        <h3 style="margin-top: 25px;">بدايتنا: 2023-04-14</h3>
+
+        <audio id="myAudio" controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        const correctPassword = "love";
+        // تم تعديل التاريخ هنا لـ 14-4-2023
+        const startDate = new Date("2023-04-14T00:00:00").getTime();
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value.toLowerCase();
+            if(input === correctPassword) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('myAudio').play();
+                startHearts();
+            } else {
+                alert("الباسوورد غلط!");
+            }
+        }
+
+        // تحديث العداد
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = now - startDate;
+            
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+
+        // وظيفة القلوب المتطايرة
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
