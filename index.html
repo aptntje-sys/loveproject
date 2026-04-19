@@ -4,136 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إلى ست البنات ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --main-color: #720917; --gold: #d4af37; --glass: rgba(255, 255, 255, 0.1); }
-        body { margin: 0; background: linear-gradient(135deg, #2b0308 0%, #720917 100%); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
-        section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; display: none; }
-        .active { display: flex; animation: fadeIn 1s ease; }
+        :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.08); }
+        * { box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { margin: 0; background: #2a0101; color: white; overflow-x: hidden; }
         
-        /* Glass Box Style */
-        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; padding: 30px; text-align: center; width: 90%; max-width: 450px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        /* تأثير القلوب في الخلفية من البداية */
+        .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .heart { position: absolute; color: var(--gold); opacity: 0.5; animation: floatUp 5s infinite linear; }
+        @keyframes floatUp { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
+
+        section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
+        .active { display: flex; animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* كارت الباسورد الشفاف */
+        .glass-box { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 40px 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
         
-        /* Inputs & Buttons */
-        input { width: 80%; padding: 12px; margin: 15px 0; border-radius: 15px; border: 1px solid var(--gold); background: rgba(0,0,0,0.3); color: white; text-align: center; font-size: 18px; }
-        button { background: var(--gold); color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        button:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--gold); }
+        h2 { color: var(--gold); margin-bottom: 20px; font-weight: 700; }
+        input { width: 85%; padding: 15px; margin: 20px 0; border-radius: 15px; border: 1px solid var(--gold); background: rgba(0,0,0,0.4); color: white; font-size: 18px; outline: none; }
+        button { background: var(--gold); color: #2a0101; border: none; padding: 12px 40px; border-radius: 25px; font-weight: bold; font-size: 18px; cursor: pointer; transition: 0.3s; }
+        
+        /* العداد */
+        .timer-container { display: flex; gap: 10px; justify-content: center; margin: 25px 0; }
+        .time-box { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 12px; min-width: 70px; border-top: 2px solid var(--gold); }
+        .time-box span { display: block; font-size: 22px; color: var(--gold); font-weight: bold; }
+        
+        /* معرض الصور */
+        .memories-list { width: 100%; max-width: 450px; margin-top: 30px; }
+        .memory-card { background: var(--glass); border-radius: 20px; padding: 10px; margin-bottom: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .memory-card img { width: 100%; border-radius: 15px; filter: sepia(20%); }
+        .memory-card p { font-size: 14px; margin-top: 10px; color: #ddd; }
 
-        /* Timer Cards */
-        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-        .time-item { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 12px; border-bottom: 2px solid var(--gold); }
-        .time-item span { display: block; font-size: 20px; font-weight: bold; color: var(--gold); }
-
-        /* Memories Section */
-        .memories-container { width: 100%; max-width: 500px; }
-        .photo-frame { margin-bottom: 30px; }
-        .photo-frame img { width: 100%; border-radius: 20px; border: 3px solid var(--glass); }
-        .photo-caption { font-size: 14px; margin-top: 8px; color: #eee; font-style: italic; }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .heart { position: absolute; color: var(--gold); animation: floatUp 4s infinite linear; opacity: 0.6; z-index: -1; }
-        @keyframes floatUp { from { transform: translateY(100vh); } to { transform: translateY(-10vh); } }
+        /* مشغل الموسيقى */
+        .music-player { position: fixed; top: 20px; right: 20px; z-index: 100; background: var(--glass); padding: 10px; border-radius: 50px; display: none; align-items: center; border: 1px solid var(--gold); }
+        
+        .surprise-box { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 25px; border: 2px dashed var(--gold); line-height: 1.8; }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    <div class="bg-hearts" id="heartPool"></div>
+
+    <div class="music-player" id="player">
+        <span style="font-size: 12px; margin-left: 10px;">Music</span>
+        <button onclick="toggleMusic()" style="padding: 5px 15px; font-size: 12px;">Pause/Play</button>
+        <audio id="track" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <section id="page1" class="active">
-        <div class="glass-card">
-            <h1 style="color: var(--gold);">نورتي قلبي ❤️</h1>
-            <p>انتي أجمل صدفة في حياتي، ومكانك هنا دايماً محمي.</p>
-            <input type="password" id="passwordInput" placeholder="اكتبي الباسورد 😉">
-            <button onclick="unlock()">دخول</button>
+        <div class="glass-box">
+            <h2>نورتي قلبي يا دكتورة 😉</h2>
+            <p style="font-size: 14px; opacity: 0.8;">الرسالة دي محتاجة مفتاح سري..</p>
+            <input type="text" id="passCode" placeholder="اكتبي الباسورد هنا">
+            <br>
+            <button onclick="checkPass()">دخول ❤️</button>
         </div>
     </section>
 
     <section id="page2">
-        <div class="glass-card">
-            <h2 style="color: var(--gold);">الوقت اللي عشناه سوا ❤️</h2>
-            <div class="timer-grid">
-                <div class="time-item"><span id="days">0</span> يوم</div>
-                <div class="time-item"><span id="hours">0</span> ساعة</div>
-                <div class="time-item"><span id="mins">0</span> دقيقة</div>
-                <div class="time-item"><span id="secs">0</span> ثانية</div>
+        <div class="glass-box">
+            <h2>حكايتنا بدأت من..</h2>
+            <div class="timer-container">
+                <div class="time-box"><span id="d">0</span>يوم</div>
+                <div class="time-box"><span id="h">0</span>ساعة</div>
+                <div class="time-box"><span id="m">0</span>دقيقة</div>
             </div>
-            <div style="background: var(--glass); padding: 5px 15px; border-radius: 10px; display: inline-block; font-size: 14px;">الذكريات</div>
-            <p style="font-size: 12px; margin-top: 5px;">يله بينا نشوف الذكريات الحلوة</p>
+            <div style="background: var(--gold); color: #000; padding: 2px 15px; border-radius: 5px; display: inline-block; font-size: 14px; font-weight: bold;">الذكريات</div>
+            <p style="font-size: 12px; margin-top: 10px;">يله بينا نشوف الذكريات الحلوة بخط صغير</p>
         </div>
 
-        <div class="memories-container" style="margin-top: 40px;">
-            <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500" alt="ذكرى">
-                <div class="photo-caption">الصورة دي كانت حلوة، مش بتتشال من البال ❤️</div>
+        <div class="memories-list">
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" alt="">
+                <p>الصورة دي كانت حلوة، مش بتتشال من البال ❤️</p>
             </div>
-            <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1516589174184-c685266d4301?q=80&w=500" alt="ذكرى">
-                <div class="photo-caption">ضحكتك هنا كانت منورة الدنيا.. أجمل يوم ❤️</div>
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=500" alt="">
+                <p>اللحظة دي كانت بداية لكل حاجة حلوة في دنيتي ❤️</p>
+            </div>
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1522673607200-164883e25bb2?w=500" alt="">
+                <p>ضحكتك في الصورة دي هي سبب فرحتي دايماً ❤️</p>
+            </div>
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1516589174184-c685266d4301?w=500" alt="">
+                <p>كل تفصيلة في اليوم ده محفورة في قلبي ❤️</p>
             </div>
         </div>
 
-        <button onclick="showSurprise()">شوفي المفاجأة 🎁</button>
+        <button onclick="goFinal()" style="margin: 40px 0;">شوفي المفاجأة 🎁</button>
     </section>
 
     <section id="page3">
-        <p style="color: var(--gold); font-size: 18px;">الرسالة دي ليكي يا ست البنات</p>
-        <div class="glass-card" style="padding: 40px;">
-            <p style="line-height: 1.8; font-size: 18px;">
-                "إلى رفيقة دربي، كل يوم بيعدي وأنا معاكي بتأكد إنك أحلى اختيار في حياتي. 
-                من يوم 14-4-2023 وأنا حاسس إن العالم بقى أجمل بكتير. 
-                انتي مش بس زوجتي، انتي سندي وحبيبتي وكل دنيتي. 
-                يا رب نفضل دايماً مع بعض ونكمل ذكرياتنا اللي مش بتخلص." 
-                <br><br>
-                بحبك للأبد ❤️
+        <p style="color: var(--gold); margin-bottom: 10px;">الرسالة دي ليكي يا ست البنات</p>
+        <div class="glass-box surprise-box">
+            <p>
+                "يا ست البنات، من يوم 14-4-2023 وحياتي اتغيرت تماماً. 
+                انتي النعمة اللي بشكر ربنا عليها كل يوم. 
+                عملتلك المكان ده عشان يفضل شاهد على كل ثانية عشناها سوا، 
+                وعشان تعرفي إنك أغلى حاجة في حياتي.. بحبك للأبد ❤️"
             </p>
         </div>
-        <div style="font-size: 40px; margin-top: 20px;">❤️❤️❤️</div>
+        <div style="font-size: 30px; margin-top: 20px;">❤️❤️❤️</div>
     </section>
 
     <script>
-        // التحقق من الباسورد وتشغيل الموسيقى
-        function unlock() {
-            const pass = document.getElementById('passwordInput').value;
-            if(pass === 'mab14') {
-                document.getElementById('bgMusic').play();
-                document.getElementById('page1').classList.remove('active');
-                document.getElementById('page2').classList.add('active');
-                setInterval(updateTimer, 1000);
-                startHearts();
-            } else {
-                alert("الباسورد غلط يا قمر! 😉");
+        // إنشاء القلوب
+        function createHearts() {
+            const container = document.getElementById('heartPool');
+            for(let i=0; i<15; i++) {
+                const h = document.createElement('div');
+                h.innerHTML = '❤️'; h.className = 'heart';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                h.style.delay = Math.random() * 5 + 's';
+                container.appendChild(h);
             }
         }
+        createHearts();
 
-        // الانتقال للمفاجأة
-        function showSurprise() {
+        function checkPass() {
+            if(document.getElementById('passCode').value === 'mab14') {
+                document.getElementById('page1').classList.remove('active');
+                document.getElementById('page2').classList.add('active');
+                document.getElementById('player').style.display = 'flex';
+                document.getElementById('track').play();
+                setInterval(calcTime, 1000);
+                window.scrollTo(0,0);
+            } else { alert("الباسورد غلط يا قمر! 😉"); }
+        }
+
+        function toggleMusic() {
+            const t = document.getElementById('track');
+            t.paused ? t.play() : t.pause();
+        }
+
+        function calcTime() {
+            const diff = new Date() - new Date("2023-04-14");
+            document.getElementById("d").innerText = Math.floor(diff / 86400000);
+            document.getElementById("h").innerText = Math.floor((diff / 3600000) % 24);
+            document.getElementById("m").innerText = Math.floor((diff / 60000) % 60);
+        }
+
+        function goFinal() {
             document.getElementById('page2').classList.remove('active');
             document.getElementById('page3').classList.add('active');
-        }
-
-        // العداد الزمني
-        function updateTimer() {
-            const diff = new Date() - new Date("2023-04-14");
-            document.getElementById("days").innerText = Math.floor(diff / 86400000);
-            document.getElementById("hours").innerText = Math.floor((diff / 3600000) % 24);
-            document.getElementById("mins").innerText = Math.floor((diff / 60000) % 60);
-            document.getElementById("secs").innerText = Math.floor((diff / 1000) % 60);
-        }
-
-        // تأثير القلوب المتطايرة
-        function startHearts() {
-            setInterval(() => {
-                const heart = document.createElement("div");
-                heart.innerHTML = "❤️";
-                heart.className = "heart";
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 4000);
-            }, 400);
+            window.scrollTo(0,0);
         }
     </script>
 </body>
 </html>
+
