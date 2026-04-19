@@ -8,100 +8,92 @@
     <style>
         :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.08); }
         * { box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        body { margin: 0; background: #2a0101; color: white; overflow-x: hidden; }
+        body { margin: 0; background: #1a0101; color: white; overflow-x: hidden; text-align: center; }
         
-        /* تأثير القلوب في الخلفية من البداية */
+        /* قلوب الخلفية ثابتة */
         .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .heart { position: absolute; color: var(--gold); opacity: 0.5; animation: floatUp 5s infinite linear; }
         @keyframes floatUp { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
 
         section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
-        .active { display: flex; animation: fadeIn 0.8s ease-in; }
+        .active { display: flex; animation: fadeIn 0.6s ease-in; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* كارت الباسورد الشفاف */
-        .glass-box { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 40px 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .glass-box { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 40px 20px; width: 95%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
         
-        h2 { color: var(--gold); margin-bottom: 20px; font-weight: 700; }
-        input { width: 85%; padding: 15px; margin: 20px 0; border-radius: 15px; border: 1px solid var(--gold); background: rgba(0,0,0,0.4); color: white; font-size: 18px; outline: none; }
-        button { background: var(--gold); color: #2a0101; border: none; padding: 12px 40px; border-radius: 25px; font-weight: bold; font-size: 18px; cursor: pointer; transition: 0.3s; }
-        
-        /* العداد */
-        .timer-container { display: flex; gap: 10px; justify-content: center; margin: 25px 0; }
-        .time-box { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 12px; min-width: 70px; border-top: 2px solid var(--gold); }
-        .time-box span { display: block; font-size: 22px; color: var(--gold); font-weight: bold; }
-        
-        /* معرض الصور */
-        .memories-list { width: 100%; max-width: 450px; margin-top: 30px; }
-        .memory-card { background: var(--glass); border-radius: 20px; padding: 10px; margin-bottom: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        .memory-card img { width: 100%; border-radius: 15px; filter: sepia(20%); }
-        .memory-card p { font-size: 14px; margin-top: 10px; color: #ddd; }
+        input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 15px; border: 1px solid var(--gold); background: rgba(0,0,0,0.4); color: white; font-size: 16px; outline: none; text-align: center; }
+        button { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; }
 
-        /* مشغل الموسيقى */
-        .music-player { position: fixed; top: 20px; right: 20px; z-index: 100; background: var(--glass); padding: 10px; border-radius: 50px; display: none; align-items: center; border: 1px solid var(--gold); }
-        
-        .surprise-box { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 25px; border: 2px dashed var(--gold); line-height: 1.8; }
+        /* العداد المطور */
+        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 20px 0; }
+        .time-card { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px; border-bottom: 2px solid var(--gold); }
+        .time-card span { display: block; font-size: 24px; color: var(--gold); font-weight: bold; }
+        .time-card label { font-size: 12px; opacity: 0.7; }
+
+        /* معرض الصور المنفصل */
+        .photo-list { width: 100%; max-width: 450px; }
+        .photo-item { background: var(--glass); border-radius: 20px; padding: 10px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .photo-item img { width: 100%; border-radius: 15px; display: block; }
+        .photo-item p { font-size: 14px; margin-top: 12px; color: #eee; }
+
+        .music-control { position: fixed; top: 15px; left: 15px; z-index: 100; background: var(--glass); padding: 8px 15px; border-radius: 30px; border: 1px solid var(--gold); display: none; font-size: 12px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="bg-hearts" id="heartPool"></div>
+    <div class="bg-hearts" id="hearts"></div>
+    <div class="music-control" id="mBtn" onclick="toggleM()">🎵 تشغيل/إيقاف الموسيقى</div>
+    <audio id="audio" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
 
-    <div class="music-player" id="player">
-        <span style="font-size: 12px; margin-left: 10px;">Music</span>
-        <button onclick="toggleMusic()" style="padding: 5px 15px; font-size: 12px;">Pause/Play</button>
-        <audio id="track" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-        </audio>
-    </div>
-
-    <section id="page1" class="active">
+    <section id="p1" class="active">
         <div class="glass-box">
-            <h2>نورتي قلبي يا دكتورة 😉</h2>
-            <p style="font-size: 14px; opacity: 0.8;">الرسالة دي محتاجة مفتاح سري..</p>
-            <input type="text" id="passCode" placeholder="اكتبي الباسورد هنا">
-            <br>
-            <button onclick="checkPass()">دخول ❤️</button>
+            <h2 style="color: var(--gold);">نورتي قلبي يا دكتورة 😉</h2>
+            <input type="text" id="pw" placeholder="اكتبي الباسورد ي قمر😉">
+            <button onclick="step2()">دخول ❤️</button>
         </div>
     </section>
 
-    <section id="page2">
+    <section id="p2">
         <div class="glass-box">
-            <h2>حكايتنا بدأت من..</h2>
-            <div class="timer-container">
-                <div class="time-box"><span id="d">0</span>يوم</div>
-                <div class="time-box"><span id="h">0</span>ساعة</div>
-                <div class="time-box"><span id="m">0</span>دقيقة</div>
+            <h2 style="color: var(--gold);">حكايتنا بدأت من..</h2>
+            <div class="timer-grid">
+                <div class="time-card"><span id="dd">0</span><label>يوم</label></div>
+                <div class="time-card"><span id="hh">0</span><label>ساعة</label></div>
+                <div class="time-card"><span id="mm">0</span><label>دقيقة</label></div>
+                <div class="time-card"><span id="ss">0</span><label>ثانية</label></div>
             </div>
-            <div style="background: var(--gold); color: #000; padding: 2px 15px; border-radius: 5px; display: inline-block; font-size: 14px; font-weight: bold;">الذكريات</div>
-            <p style="font-size: 12px; margin-top: 10px;">يله بينا نشوف الذكريات الحلوة بخط صغير</p>
+            <div style="background: var(--gold); color: #000; padding: 5px 20px; border-radius: 20px; font-weight: bold; margin: 10px 0;">14-04-2023</div>
+            <p style="font-size: 13px; margin-top: 20px;">يله بينا نشوف الذكريات الحلوة بخط صغير</p>
+            <button onclick="step3()">شوفي الذكريات 📸</button>
         </div>
+    </section>
 
-        <div class="memories-list">
-            <div class="memory-card">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" alt="">
+    <section id="p3" style="justify-content: flex-start; padding-top: 40px;">
+        <h2 style="color: var(--gold); margin-bottom: 30px;">ذكرياتنا اللي مش بتخلص ❤️</h2>
+        <div class="photo-list">
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="">
                 <p>الصورة دي كانت حلوة، مش بتتشال من البال ❤️</p>
             </div>
-            <div class="memory-card">
-                <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=500" alt="">
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1516589174184-c685266d4301?w=500" alt="">
                 <p>اللحظة دي كانت بداية لكل حاجة حلوة في دنيتي ❤️</p>
             </div>
-            <div class="memory-card">
+            <div class="photo-item">
                 <img src="https://images.unsplash.com/photo-1522673607200-164883e25bb2?w=500" alt="">
                 <p>ضحكتك في الصورة دي هي سبب فرحتي دايماً ❤️</p>
             </div>
-            <div class="memory-card">
-                <img src="https://images.unsplash.com/photo-1516589174184-c685266d4301?w=500" alt="">
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=500" alt="">
                 <p>كل تفصيلة في اليوم ده محفورة في قلبي ❤️</p>
             </div>
         </div>
-
-        <button onclick="goFinal()" style="margin: 40px 0;">شوفي المفاجأة 🎁</button>
+        <button onclick="step4()" style="margin: 40px 0;">شوفي المفاجأة 🎁</button>
     </section>
 
-    <section id="page3">
-        <p style="color: var(--gold); margin-bottom: 10px;">الرسالة دي ليكي يا ست البنات</p>
-        <div class="glass-box surprise-box">
+    <section id="p4">
+        <p style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">الرسالة دي ليكي يا ست البنات</p>
+        <div class="glass-box" style="border: 2px dashed var(--gold); line-height: 1.8;">
             <p>
                 "يا ست البنات، من يوم 14-4-2023 وحياتي اتغيرت تماماً. 
                 انتي النعمة اللي بشكر ربنا عليها كل يوم. 
@@ -113,49 +105,47 @@
     </section>
 
     <script>
-        // إنشاء القلوب
         function createHearts() {
-            const container = document.getElementById('heartPool');
-            for(let i=0; i<15; i++) {
+            const c = document.getElementById('hearts');
+            for(let i=0; i<20; i++) {
                 const h = document.createElement('div');
                 h.innerHTML = '❤️'; h.className = 'heart';
                 h.style.left = Math.random() * 100 + 'vw';
                 h.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                h.style.delay = Math.random() * 5 + 's';
-                container.appendChild(h);
+                c.appendChild(h);
             }
         }
         createHearts();
 
-        function checkPass() {
-            if(document.getElementById('passCode').value === 'mab14') {
-                document.getElementById('page1').classList.remove('active');
-                document.getElementById('page2').classList.add('active');
-                document.getElementById('player').style.display = 'flex';
-                document.getElementById('track').play();
-                setInterval(calcTime, 1000);
-                window.scrollTo(0,0);
+        function step2() {
+            if(document.getElementById('pw').value === 'mab14') {
+                show('p2');
+                document.getElementById('audio').play();
+                document.getElementById('mBtn').style.display = 'block';
+                setInterval(updateT, 1000);
             } else { alert("الباسورد غلط يا قمر! 😉"); }
         }
+        function step3() { show('p3'); }
+        function step4() { show('p4'); }
 
-        function toggleMusic() {
-            const t = document.getElementById('track');
-            t.paused ? t.play() : t.pause();
-        }
-
-        function calcTime() {
-            const diff = new Date() - new Date("2023-04-14");
-            document.getElementById("d").innerText = Math.floor(diff / 86400000);
-            document.getElementById("h").innerText = Math.floor((diff / 3600000) % 24);
-            document.getElementById("m").innerText = Math.floor((diff / 60000) % 60);
-        }
-
-        function goFinal() {
-            document.getElementById('page2').classList.remove('active');
-            document.getElementById('page3').classList.add('active');
+        function show(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
+        }
+
+        function toggleM() {
+            const a = document.getElementById('audio');
+            a.paused ? a.play() : a.pause();
+        }
+
+        function updateT() {
+            const diff = new Date() - new Date("2023-04-14T00:00:00");
+            document.getElementById("dd").innerText = Math.floor(diff / 86400000);
+            document.getElementById("hh").innerText = Math.floor((diff / 3600000) % 24);
+            document.getElementById("mm").innerText = Math.floor((diff / 60000) % 60);
+            document.getElementById("ss").innerText = Math.floor((diff / 1000) % 60);
         }
     </script>
 </body>
 </html>
-
