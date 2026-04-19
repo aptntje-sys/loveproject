@@ -37,9 +37,11 @@
         .cursor::after { content: '|'; animation: blink 1s infinite; color: var(--gold); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* سهم الرجوع */
         #backBtn { position: fixed; top: 20px; right: 20px; z-index: 100; background: var(--glass); border: 1px solid var(--gold); color: var(--gold); width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: 0.3s; }
-        #backBtn:hover { background: var(--gold); color: #000; }
+        
+        /* تعديل زرار الموسيقى */
+        .music-control { position: fixed; top: 20px; left: 20px; z-index: 100; background: var(--glass); padding: 10px; border-radius: 50%; border: 1px solid var(--gold); display: none; cursor: pointer; width: 45px; height: 45px; align-items: center; justify-content: center; font-size: 20px; }
+        .music-control.muted::after { content: ''; position: absolute; width: 30px; height: 2px; background: #ff4d4d; transform: rotate(-45deg); border-radius: 2px; }
 
         .falling-flower { position: fixed; font-size: 28px; z-index: 999; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
@@ -48,10 +50,9 @@
 <body>
 
     <div class="bg-container" id="bg"></div>
-    
     <div id="backBtn" onclick="goBack()">➜</div>
 
-    <div class="music-control" id="mBtn" style="position:fixed; top:20px; left:20px; z-index:100; background:var(--glass); padding:10px; border-radius:50%; border:1px solid var(--gold); display:none; cursor:pointer;" onclick="toggleM()">🎵</div>
+    <div id="mBtn" class="music-control" onclick="toggleM()">🎵</div>
     <audio id="audio" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
 
     <section id="p1" class="active">
@@ -93,12 +94,10 @@
         <div class="glass-box" style="border: 2px dashed var(--gold); min-height: 250px;">
             <div id="typewriter" class="cursor"></div>
         </div>
-        
         <div class="glass-box" style="margin-top:20px; padding:20px;">
             <h4 style="margin:0; color:var(--gold); font-weight: 800;">باقي على يومنا الكبير إن شاء الله 😉💍</h4>
             <div id="engagement-timer" style="font-size: 20px; margin-top:10px; font-weight:800;"></div>
         </div>
-
         <button onclick="giveFlower()" style="background: var(--light-pink); color: #4a0404; margin-top: 20px;">خدي وردة 🌸</button>
     </section>
 
@@ -153,8 +152,9 @@
             if(document.getElementById('pw').value === 'mab14') {
                 showPage('p2');
                 currentStep = 2;
-                document.getElementById('audio').play();
-                document.getElementById('mBtn').style.display = 'block';
+                const audio = document.getElementById('audio');
+                audio.play();
+                document.getElementById('mBtn').style.display = 'flex';
                 document.getElementById('backBtn').style.display = 'flex';
                 setInterval(updateTimers, 1000);
             } else { alert("الباسورد غلط يا دكتورة! 😉"); }
@@ -164,8 +164,6 @@
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
-            
-            // تحديد الخطوة الحالية للرجوع
             if(id === 'p2') currentStep = 2;
             if(id === 'p3') currentStep = 3;
             if(id === 'p4') currentStep = 4;
@@ -173,7 +171,6 @@
 
         function goBack() {
             if(currentStep === 2) {
-                // لو في صفحة العداد، نرجع للباسورد ونخفي السهم
                 showPage('p1');
                 document.getElementById('backBtn').style.display = 'none';
                 currentStep = 1;
@@ -232,8 +229,16 @@
 
         function toggleM() {
             const a = document.getElementById('audio');
-            a.paused ? a.play() : a.pause();
+            const btn = document.getElementById('mBtn');
+            if (a.paused) {
+                a.play();
+                btn.classList.remove('muted');
+            } else {
+                a.pause();
+                btn.classList.add('muted');
+            }
         }
     </script>
 </body>
 </html>
+
