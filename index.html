@@ -11,18 +11,17 @@
         body { margin: 0; background: #0f0101; color: white; overflow-x: hidden; text-align: center; }
         
         .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--d) infinite; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        .heart { position: absolute; color: var(--gold); opacity: 0.3; animation: floatUp 5s infinite linear; }
-        @keyframes floatUp { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--d) infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+        
+        .bg-heart { position: absolute; color: #ffb6c1; opacity: 0.5; animation: floatUp 6s infinite linear; }
+        @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
 
         section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
         .active { display: flex; }
 
         .glass-box { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 35px 20px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); }
         
-        .profile-img { width: 230px; height: 230px; border-radius: 50%; border: 5px solid var(--gold); object-fit: cover; margin-bottom: 25px; box-shadow: 0 0 30px rgba(197, 160, 89, 0.4); background: #222; }
-
         input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 20px; border: 1.5px solid var(--gold); background: rgba(0,0,0,0.6); color: white; text-align: center; font-size: 18px; outline: none; }
         button { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 30px; font-weight: 800; cursor: pointer; transition: 0.3s; margin: 10px 5px; }
         
@@ -38,6 +37,10 @@
         .cursor::after { content: '|'; animation: blink 1s infinite; color: var(--gold); }
         @keyframes blink { 50% { opacity: 0; } }
 
+        /* سهم الرجوع */
+        #backBtn { position: fixed; top: 20px; right: 20px; z-index: 100; background: var(--glass); border: 1px solid var(--gold); color: var(--gold); width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: 0.3s; }
+        #backBtn:hover { background: var(--gold); color: #000; }
+
         .falling-flower { position: fixed; font-size: 28px; z-index: 999; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
     </style>
@@ -45,12 +48,15 @@
 <body>
 
     <div class="bg-container" id="bg"></div>
+    
+    <div id="backBtn" onclick="goBack()">➜</div>
+
     <div class="music-control" id="mBtn" style="position:fixed; top:20px; left:20px; z-index:100; background:var(--glass); padding:10px; border-radius:50%; border:1px solid var(--gold); display:none; cursor:pointer;" onclick="toggleM()">🎵</div>
     <audio id="audio" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
 
     <section id="p1" class="active">
         <div class="glass-box">
-            <img src="couple.jpg" class="profile-img" onerror="this.src='https://via.placeholder.com/230?text=Photo+Error'">
+            <div style="font-size: 50px; margin-bottom: 20px;">🌹</div>
             <h2 id="welcome-text" style="color: var(--gold); min-height: 35px;" class="cursor"></h2>
             <input type="text" id="pw" placeholder="الباسورد يا دكتورة 😉">
             <button onclick="checkPw()">دخول ❤️</button>
@@ -97,19 +103,32 @@
     </section>
 
     <script>
-        // الخلفية
         const bg = document.getElementById('bg');
-        for(let i=0; i<50; i++) {
-            const s = document.createElement('div');
-            s.className = 'star';
-            s.style.width = s.style.height = Math.random()*3+'px';
-            s.style.left = Math.random()*100+'vw';
-            s.style.top = Math.random()*100+'vh';
-            s.style.setProperty('--d', (Math.random()*3+2)+'s');
-            bg.appendChild(s);
-        }
+        let currentStep = 1;
 
-        // تأثير الكتابة
+        function createElements() {
+            for(let i=0; i<40; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                s.style.width = s.style.height = Math.random()*3+'px';
+                s.style.left = Math.random()*100+'vw';
+                s.style.top = Math.random()*100+'vh';
+                s.style.setProperty('--d', (Math.random()*3+2)+'s');
+                bg.appendChild(s);
+            }
+            setInterval(() => {
+                const h = document.createElement('div');
+                h.innerHTML = '💕';
+                h.className = 'bg-heart';
+                h.style.left = Math.random()*100+'vw';
+                h.style.fontSize = (Math.random()*15 + 10)+'px';
+                h.style.animationDuration = (Math.random()*3 + 4)+'s';
+                bg.appendChild(h);
+                setTimeout(() => h.remove(), 6000);
+            }, 600);
+        }
+        createElements();
+
         function typeWriter(id, text, speed, callback) {
             let i = 0;
             const el = document.getElementById(id);
@@ -124,7 +143,6 @@
             type();
         }
 
-        // عند التحميل
         window.onload = () => {
             setTimeout(() => {
                 typeWriter("welcome-text", "نورتي قلبي يا دكتورة 😉", 100);
@@ -134,8 +152,10 @@
         function checkPw() {
             if(document.getElementById('pw').value === 'mab14') {
                 showPage('p2');
+                currentStep = 2;
                 document.getElementById('audio').play();
                 document.getElementById('mBtn').style.display = 'block';
+                document.getElementById('backBtn').style.display = 'flex';
                 setInterval(updateTimers, 1000);
             } else { alert("الباسورد غلط يا دكتورة! 😉"); }
         }
@@ -144,12 +164,33 @@
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
+            
+            // تحديد الخطوة الحالية للرجوع
+            if(id === 'p2') currentStep = 2;
+            if(id === 'p3') currentStep = 3;
+            if(id === 'p4') currentStep = 4;
+        }
+
+        function goBack() {
+            if(currentStep === 2) {
+                // لو في صفحة العداد، نرجع للباسورد ونخفي السهم
+                showPage('p1');
+                document.getElementById('backBtn').style.display = 'none';
+                currentStep = 1;
+            } else if(currentStep === 3) {
+                showPage('p2');
+                currentStep = 2;
+            } else if(currentStep === 4) {
+                showPage('p3');
+                currentStep = 3;
+            }
         }
 
         const msg = "يا أغلى من روحي ☺️ أنا قاعد دلوقتي بفكر فيكي ولقيت نفسي عايز أكتبلك كلام كتير رغم إنك عارفة إن الكلام ساعات بيخوني وما بيعرفش يوصف اللي جوايا صح 👀 بس بجد أنا كل يوم بكتشف إن وجودك في حياتي ده أكبر نعمة ربنا رزقني بيها.. أنتي مش بس حبيبتي، أنتي نصيبي الحلو من الدنيا والضحكة اللي بتطلع من قلبي بجد مهما كنت شايل هموم 🫂 عارفة؟ أنا بحب تفاصيلك الصغيرة اللي ممكن محدش ياخد باله منها، بحب طريقتك في الكلام (بس ميمنعش إنك عبيطة 😂)، وبحب إنك دايماً بتعرفي تطمنيني بمجرد كلمة منك.. معاكي بحس إن الدنيا لسه بخير وبحس إن عندي طاقة أهد جبال عشان بس أشوفك مبسوطة ومرتاحة.. أنتي السند والكتف اللي برمي عليه تعبي وببقى عارف إني هقوم أقوى بيكي. نفسي تعرفي إن مفيش حد في الدنيا ممكن ياخد مكانك ولا فيه حاجة تعوضني عنك، أنا عايش عشان اللحظة اللي نكون فيها سوا في بيتنا ونبني كل الأحلام اللي حلمنا بيها مع بعض.. هفضل دايماً جنبك وفي ضهرك ومعاكي في المرة قبل الحلوة عشان أنتي تستاهلي كل حاجة حلوة يا حلوة 😉🌍";
 
         function startFinalPage() {
             showPage('p4');
+            currentStep = 4;
             setTimeout(() => {
                 typeWriter("typewriter", msg, 45);
             }, 500);
@@ -164,7 +205,6 @@
             document.getElementById("mm").innerText = Math.floor((diff1 / 60000) % 60);
             document.getElementById("ss").innerText = Math.floor((diff1 / 1000) % 60);
 
-            // عداد الخطوبة (سنة وشهور)
             const target = new Date("2027-10-14T00:00:00");
             const diff2 = target - now;
             if (diff2 > 0) {
