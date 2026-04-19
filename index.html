@@ -31,7 +31,7 @@
 
     <div class="bg-hearts" id="hearts"></div>
     <div class="music-control" id="mBtn" onclick="toggleM()">🎵 تشغيل/إيقاف الموسيقى</div>
-    <audio id="audio" loop><source src="رابط_الاغنية_من_موقع_catbox_هنا" type="audio/mpeg"></audio>
+    <audio id="audio" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
 
     <section id="p1" class="active">
         <div class="glass-box">
@@ -58,11 +58,11 @@
     <section id="p3" style="justify-content: flex-start; padding-top: 40px;">
         <h2 style="color: var(--gold); margin-bottom: 30px;">ذكرياتنا الحلوة ❤️</h2>
         <div class="photo-list">
-            <div class="photo-item"><img src="1.jpg"><p>الصورة دي كانت حلوة، مش بتتشال من البال ❤️</p></div>
-            <div class="photo-item"><img src="2.jpg"><p>اللحظة دي كانت بداية لكل حاجة حلوة ❤️</p></div>
-            <div class="photo-item"><img src="3.jpg"><p>ضحكتك في الصورة دي سبب فرحتي ❤️</p></div>
-            <div class="photo-item"><img src="4.jpg"><p>كل تفصيلة هنا محفورة في قلبي ❤️</p></div>
-            <div class="photo-item"><img src="5.jpg"><p>أجمل ذكرى مع أغلى إنسانة ❤️</p></div>
+            <div class="photo-item"><img src="1.png"><p>الصورة دي كانت حلوة، مش بتتشال من البال ❤️</p></div>
+            <div class="photo-item"><img src="2.png"><p>اللحظة دي كانت بداية لكل حاجة حلوة ❤️</p></div>
+            <div class="photo-item"><img src="3.png"><p>ضحكتك في الصورة دي سبب فرحتي ❤️</p></div>
+            <div class="photo-item"><img src="4.png"><p>كل تفصيلة هنا محفورة في قلبي ❤️</p></div>
+            <div class="photo-item"><img src="5.png"><p>أجمل ذكرى مع أغلى إنسانة ❤️</p></div>
         </div>
         <button onclick="step4()" style="margin: 40px 0;">شوفي المفاجأة 🎁</button>
     </section>
@@ -72,6 +72,7 @@
         <div class="glass-box" style="border: 2px dashed var(--gold); line-height: 1.8;">
             <p>"يا ست البنات، من يوم 14-4-2023 وحياتي اتغيرت تماماً.. بحبك للأبد ❤️"</p>
         </div>
+        <div style="font-size: 30px; margin-top: 20px;">❤️❤️❤️</div>
     </section>
 
     <script>
@@ -86,6 +87,7 @@
             }
         }
         createHearts();
+
         function step2() {
             if(document.getElementById('pw').value === 'mab14') {
                 show('p2');
@@ -96,15 +98,18 @@
         }
         function step3() { show('p3'); }
         function step4() { show('p4'); }
+
         function show(id) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
+
         function toggleM() {
             const a = document.getElementById('audio');
             a.paused ? a.play() : a.pause();
         }
+
         function updateT() {
             const diff = new Date() - new Date("2023-04-14T00:00:00");
             document.getElementById("dd").innerText = Math.floor(diff / 86400000);
