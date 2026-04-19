@@ -3,135 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى ست البنات ❤️</title>
+    <title>إلى دكتورتي الغالية ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #c5a059; --glass: rgba(255, 255, 255, 0.12); --pink-love: #ff4d6d; }
-        * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; }
-        body { background: #0f0101; color: white; overflow-x: hidden; text-align: center; }
+        :root { 
+            --gold: #d4af37; 
+            --glass: rgba(255, 255, 255, 0.1); 
+            --pink-love: #ff4d6d; 
+            --bg-dark: #0a0000;
+        }
 
-        .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .bg-heart { position: absolute; color: var(--pink-love); opacity: 0.4; animation: floatUp 6s infinite linear; }
-        @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
+        * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; }
+        
+        body { 
+            background: var(--bg-dark); 
+            color: white; 
+            overflow-x: hidden; 
+            text-align: center; 
+            min-height: 100vh;
+        }
+
+        /* سماء النجوم والقلوب في الخلفية */
+        .stars-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        }
+        .star {
+            position: absolute; background: white; border-radius: 50%;
+            opacity: 0.5; animation: twinkle var(--duration) infinite ease-in-out;
+        }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        .floating-heart {
+            position: absolute; color: var(--pink-love); opacity: 0.3;
+            animation: floatUp 8s infinite linear;
+        }
+        @keyframes floatUp { 
+            from { transform: translateY(110vh) rotate(0deg); } 
+            to { transform: translateY(-10vh) rotate(360deg); } 
+        }
 
         /* فيديو الخلفية m7 */
-        #video-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.5; display: none; }
+        #video-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; opacity: 0.4; display: none;
+        }
 
-        section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
-        .active { display: flex; animation: fadeIn 0.4s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        section { 
+            min-height: 100vh; display: none; flex-direction: column; 
+            align-items: center; justify-content: center; padding: 20px; 
+            position: relative; z-index: 10;
+        }
+        .active { display: flex; animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .glass-box { background: var(--glass); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 30px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
-        
-        /* صورة البداية m6 */
-        .profile-img { width: 220px; height: 220px; border-radius: 50%; border: 4px solid var(--gold); object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 25px var(--gold); background: #222; }
+        .glass-box { 
+            background: var(--glass); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border-radius: 35px; padding: 40px 30px; 
+            width: 95%; max-width: 450px; 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); 
+        }
 
-        input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 20px; border: 2px solid var(--gold); background: rgba(0,0,0,0.7); color: white; text-align: center; font-size: 18px; outline: none; }
-        button { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 30px; font-weight: 900; cursor: pointer; transition: 0.3s; margin: 10px 5px; }
+        /* القلب الشفاف في صفحة الباسورد (بديل الصورة m6) */
+        .crystal-heart {
+            font-size: 80px; color: rgba(255, 77, 109, 0.7);
+            filter: drop-shadow(0 0 15px var(--pink-love));
+            margin-bottom: 20px; animation: pulse 2s infinite ease-in-out;
+            display: inline-block;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin: 20px 0; }
-        .time-card { background: rgba(0,0,0,0.6); padding: 15px; border-radius: 20px; border-bottom: 3px solid var(--pink-love); }
-        .time-card span { display: block; font-size: 26px; color: var(--gold); font-weight: 900; }
+        input { 
+            width: 100%; padding: 15px; margin: 25px 0; border-radius: 20px; 
+            border: 2px solid rgba(212, 175, 55, 0.4); 
+            background: rgba(0, 0, 0, 0.4); color: white; 
+            text-align: center; font-size: 18px; outline: none;
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
 
-        /* رجوع زرار الموسيقى فوق */
-        .music-control { position: fixed; top: 20px; left: 20px; z-index: 1000; background: var(--glass); padding: 10px; border-radius: 50%; border: 1px solid var(--gold); display: none; cursor: pointer; width: 50px; height: 50px; align-items: center; justify-content: center; font-size: 22px; backdrop-filter: blur(10px); }
-        .music-control.muted::after { content: ''; position: absolute; width: 35px; height: 3px; background: #ff4d4d; transform: rotate(-45deg); border-radius: 2px; }
+        button { 
+            background: linear-gradient(45deg, var(--gold), #f3e5ab); 
+            color: #2b1d0e; border: none; padding: 14px 40px; 
+            border-radius: 30px; font-weight: 900; font-size: 18px;
+            cursor: pointer; transition: 0.4s; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 10px;
+        }
+        button:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
 
-        #backBtn { position: fixed; top: 20px; right: 20px; z-index: 1000; background: var(--glass); border: 1px solid var(--gold); color: var(--gold); width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); }
-        
-        #typewriter { line-height: 1.8; font-size: 17px; text-align: right; font-weight: 700; color: #fff; }
-        .cursor::after { content: '|'; animation: blink 1s infinite; color: var(--gold); }
+        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin: 25px 0; }
+        .time-card { 
+            background: rgba(0, 0, 0, 0.35); padding: 15px; border-radius: 25px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .time-card span { display: block; font-size: 32px; color: var(--gold); font-weight: 900; }
+        .time-card label { font-size: 14px; opacity: 0.8; font-weight: 700; }
+
+        .music-control { 
+            position: fixed; top: 25px; left: 25px; z-index: 1000; 
+            background: var(--glass); padding: 12px; border-radius: 50%; 
+            border: 1px solid var(--gold); display: none; cursor: pointer; 
+            backdrop-filter: blur(10px); transition: 0.3s;
+            width: 50px; height: 50px; align-items: center; justify-content: center; font-size: 22px;
+        }
+        .music-control.muted::after {
+            content: ''; position: absolute; width: 30px; height: 3px; 
+            background: #ff4d4d; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        #typewriter { line-height: 1.9; font-size: 18px; text-align: justify; font-weight: 700; color: #fdfdfd; }
+        .cursor::after { content: '|'; animation: blink 0.8s infinite; color: var(--gold); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        .falling-flower { position: fixed; font-size: 28px; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        .falling-item { 
+            position: fixed; z-index: 9999; pointer-events: none; 
+            animation: fall linear forwards; 
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(540deg); opacity: 0; } }
+
+        /* ستايل الصور في صفحة الذكريات */
+        .photo-card {
+            background: var(--glass); border-radius: 25px; padding: 10px; margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .photo-card img { width: 100%; border-radius: 20px; object-fit: cover; }
+        .photo-card p { margin-top: 10px; font-weight: 700; color: white; font-size: 16px; }
     </style>
 </head>
 <body>
 
-    <div class="bg-container" id="bg"></div>
-    <div id="backBtn" onclick="goBack()">➜</div>
+    <div class="stars-container" id="stars-bg"></div>
 
     <div id="mBtn" class="music-control" onclick="toggleM()">🎵</div>
 
     <video id="video-bg" loop muted playsinline>
         <source src="m7.mp4" type="video/mp4">
-        <source src="m7.MOV" type="video/quicktime">
     </video>
 
     <audio id="audio" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
 
     <section id="p1" class="active">
         <div class="glass-box">
-            <img id="mainImg" src="m6.jpg" class="profile-img" onerror="this.src='m6.png'; this.onerror=function(){this.src='m6.jpeg';}">
-            <h2 id="welcome-text" style="color: var(--gold); min-height: 40px; font-weight: 900;" class="cursor"></h2>
-            <input type="text" id="pw" placeholder="الباسورد يا دكتورة 😉">
+            <div class="crystal-heart">❤️</div>
+            <h2 id="welcome-text" style="color: var(--gold); min-height: 40px; font-weight: 900; font-size: 24px;" class="cursor"></h2>
+            <input type="text" id="pw" placeholder="كلمة السر يا ست البنات 😉">
             <button onclick="checkPw()">دخول ❤️</button>
         </div>
     </section>
 
     <section id="p2">
         <div class="glass-box">
-            <h3 style="color: var(--gold); font-weight: 900; font-size: 22px;">حكايتنا بدأت من..</h3>
+            <h3 style="color: var(--gold); font-weight: 900; font-size: 26px; margin-bottom: 10px;">حكايتنا بدأت من..</h3>
             <div class="timer-grid">
                 <div class="time-card"><span id="dd">0</span><label>يوم</label></div>
                 <div class="time-card"><span id="hh">0</span><label>ساعة</label></div>
                 <div class="time-card"><span id="mm">0</span><label>دقيقة</label></div>
                 <div class="time-card"><span id="ss">0</span><label>ثانية</label></div>
             </div>
-            <div style="background: var(--pink-love); color: white; padding: 8px 25px; border-radius: 25px; font-weight: 900;">14-04-2023</div>
-            <button onclick="showPage('p3')" style="margin-top: 20px;">ذكرياتنا 📸</button>
+            <div style="background: var(--pink-love); color: white; padding: 10px 30px; border-radius: 30px; font-weight: 900; display: inline-block; box-shadow: 0 5px 15px rgba(255,77,109,0.4);">14-04-2023</div>
+            <br>
+            <button onclick="showPage('p3')" style="margin-top: 30px;">ذكرياتنا 📸</button>
         </div>
     </section>
 
     <section id="p3" style="justify-content: flex-start; padding-top: 50px;">
-        <h2 style="color: var(--gold); font-weight: 900; margin-bottom: 30px; font-size: 26px;">أجمل لحظاتنا ❤️</h2>
-        <div style="width: 100%; max-width: 450px;">
-            <div style="background: var(--glass); border-radius: 25px; padding: 10px; margin-bottom: 25px;"><img src="m1.jpg" style="width:100%; border-radius:20px;" onerror="this.src='m1.png'"><p>أول ضحكة صافية ❤️</p></div>
-            <div style="background: var(--glass); border-radius: 25px; padding: 10px; margin-bottom: 25px;"><img src="m2.jpg" style="width:100%; border-radius:20px;" onerror="this.src='m2.png'"><p>البدايات اللي منسيتهاش ❤️</p></div>
-            <div style="background: var(--glass); border-radius: 25px; padding: 10px; margin-bottom: 25px;"><img src="m3.jpg" style="width:100%; border-radius:20px;" onerror="this.src='m3.png'"><p>نور عيني ❤️</p></div>
+        <h2 style="color: var(--gold); font-weight: 900; margin-bottom: 30px; font-size: 26px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">أجمل لحظاتنا ❤️</h2>
+        <div style="width: 100%; max-width: 450px; position: relative; z-index: 10;">
+            <div class="photo-card"><img src="m1.jpg" onerror="this.src='m1.png';"><p>أول ضحكة صافية ❤️</p></div>
+            <div class="photo-card"><img src="m2.jpg" onerror="this.src='m2.png';"><p>البدايات اللي منسيتهاش ❤️</p></div>
+            <div class="photo-card"><img src="m3.jpg" onerror="this.src='m3.png';"><p>نور عيني ❤️</p></div>
+            <div class="photo-card"><img src="m4.jpg" onerror="this.src='m4.png';"><p>كل تفصيلة معاكي حياة ❤️</p></div>
+            <div class="photo-card"><img src="m5.jpg" onerror="this.src='m5.png';"><p>سندي في الدنيا ❤️</p></div>
         </div>
-        <button onclick="startFinalPage()" style="margin: 20px 0;">المفاجأة 🎁</button>
+        <button onclick="startFinalPage()" style="margin: 30px 0; position: relative; z-index: 10;">المفاجأة 🎁</button>
     </section>
 
     <section id="p4">
-        <div class="glass-box" style="border: 2px dashed var(--gold); min-height: 250px;">
+        <div class="glass-box" style="max-width: 500px;">
             <div id="typewriter" class="cursor"></div>
+            <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 20px;">
+                <h4 style="color: var(--gold); font-weight: 900; margin-bottom: 5px;">باقي على يومنا الكبير إن شاء الله 💍</h4>
+                <div id="engagement-timer" style="font-size: 22px; font-weight: 900;"></div>
+            </div>
+            <button onclick="giveFlowers()" style="margin-top: 25px; background: #ffb6c1; color: #4a0404;">خدي وردة 🌸</button>
         </div>
-        <div class="glass-box" style="margin-top:20px; padding:20px;">
-            <h4 style="margin:0; color:var(--gold); font-weight: 900;">باقي على يومنا الكبير إن شاء الله 😉💍</h4>
-            <div id="engagement-timer" style="font-size: 22px; margin-top:10px; font-weight:900;"></div>
-        </div>
-        <button onclick="giveFlower()" style="background: #ffb6c1; color: #4a0404; margin-top: 20px; padding: 12px 40px;">خدي وردة 🌸</button>
     </section>
 
     <script>
-        let currentStep = 1;
-        const bg = document.getElementById('bg');
-        
+        // خلق النجوم والقلوب
+        const bg = document.getElementById('stars-bg');
+        function initStars() {
+            for(let i=0; i<100; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                const size = Math.random() * 3 + 'px';
+                s.style.width = size; s.style.height = size;
+                s.style.top = Math.random() * 100 + '%';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                bg.appendChild(s);
+            }
+        }
         setInterval(() => {
             const h = document.createElement('div');
-            h.innerHTML = '💕'; h.className = 'bg-heart';
-            h.style.left = Math.random()*100+'vw';
-            h.style.fontSize = (Math.random()*15 + 12)+'px';
+            h.innerHTML = '💕'; h.className = 'floating-heart';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = (Math.random() * 15 + 15) + 'px';
             bg.appendChild(h);
-            setTimeout(() => h.remove(), 6000);
-        }, 600);
+            setTimeout(() => h.remove(), 8000);
+        }, 1000);
 
-        function typeWriter(id, text, speed) {
+        initStars();
+
+        function typeWriter(id, text, speed, callback) {
             let i = 0; const el = document.getElementById(id); el.innerHTML = "";
-            function type() { if (i < text.length) { el.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }
+            function type() { 
+                if (i < text.length) { 
+                    el.innerHTML += text.charAt(i); i++; 
+                    setTimeout(type, speed); 
+                } else if (callback) callback();
+            }
             type();
         }
 
-        window.onload = () => { typeWriter("welcome-text", "نورتي قلبي يا دكتورة 😉", 40); };
+        // الكلمة بتظهر بسرعة
+        window.onload = () => { typeWriter("welcome-text", "نورتي قلبي يا دكتورة 😉", 50); };
 
         function checkPw() {
             if(document.getElementById('pw').value === 'mab14') {
                 showPage('p2');
                 document.getElementById('audio').play();
                 document.getElementById('mBtn').style.display = 'flex';
-                document.getElementById('backBtn').style.display = 'flex';
+                // تشغيل فيديو m7
+                document.getElementById('video-bg').style.display = 'block';
+                document.getElementById('video-bg').play();
                 setInterval(updateTimers, 1000);
             } else { alert("الباسورد غلط يا دكتورة! 😉"); }
         }
@@ -139,22 +249,7 @@
         function showPage(id) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
-            const v = document.getElementById('video-bg');
-            if(id === 'p2') { 
-                v.style.display = 'block'; 
-                v.play().catch(e => console.log("Video play failed", e)); 
-            } 
-            else { v.style.display = 'none'; v.pause(); }
-            
             window.scrollTo(0,0);
-            if(id === 'p2') currentStep = 2; if(id === 'p3') currentStep = 3; if(id === 'p4') currentStep = 4;
-        }
-
-        function goBack() {
-            if(currentStep === 2) { showPage('p1'); document.getElementById('backBtn').style.display = 'none'; document.getElementById('mBtn').style.display = 'none'; currentStep = 1; }
-            else if(currentStep === 3) showPage('p2');
-            else if(currentStep === 4) showPage('p3');
         }
 
         function updateTimers() {
@@ -176,7 +271,10 @@
 
         const msg = "يا أغلى من روحي ☺️ أنا قاعد دلوقتي بفكر فيكي ولقيت نفسي عايز أكتبلك كلام كتير رغم إنك عارفة إن الكلام ساعات بيخوني وما بيعرفش يوصف اللي جوايا صح 👀 بس بجد أنا كل يوم بكتشف إن وجودك في حياتي ده أكبر نعمة ربنا رزقني بيها.. أنتي مش بس حبيبتي، أنتي نصيبي الحلو من الدنيا والضحكة اللي بتطلع من قلبي بجد مهما كنت شايل هموم 🫂 عارفة؟ أنا بحب تفاصيلك الصغيرة اللي ممكن محدش ياخد باله منها، بحب طريقتك في الكلام (بس ميمنعش إنك عبيطة 😂)، وبحب إنك دايماً بتعرفي تطمنيني بمجرد كلمة منك.. معاكي بحس إن الدنيا لسه بخير وبحس إن عندي طاقة أهد جبال عشان بس أشوفك مبسوطة ومرتاحة.. أنتي السند والكتف اللي برمي عليه تعبي وببقى عارف إني هقوم أقوى بيكي. نفسي تعرفي إن مفيش حد في الدنيا ممكن ياخد مكانك ولا فيه حاجة تعوضني عنك، أنا عايش عشان اللحظة اللي نكون فيها سوا في بيتنا ونبني كل الأحلام اللي حلمنا بيها مع بعض.. هفضل دايماً جنبك وفي ضهرك ومعاكي في المرة قبل الحلوة عشان أنتي تستاهلي كل حاجة حلوة يا حلوة 😉🌍";
 
-        function startFinalPage() { showPage('p4'); setTimeout(() => typeWriter("typewriter", msg, 35), 500); }
+        function startFinalPage() {
+            showPage('p4');
+            setTimeout(() => { typeWriter("typewriter", msg, 40); }, 500);
+        }
 
         function toggleM() {
             const a = document.getElementById('audio');
@@ -185,12 +283,19 @@
             else { a.pause(); btn.classList.add('muted'); }
         }
 
-        function giveFlower() {
-            for(let i=0; i<20; i++) {
-                const f = document.createElement('div'); f.className = 'falling-flower';
-                f.innerHTML = '🌹'; f.style.left = Math.random()*100+'vw'; f.style.top = '-50px';
-                f.style.animationDuration = (Math.random()*2+2)+'s'; document.body.appendChild(f);
-                setTimeout(() => f.remove(), 4000);
+        // تشكيلة الورد المتنوعة
+        function giveFlowers() {
+            const flowers = ['🌹', '🌸', '🌷', '🌻', '🌺', '🌼', '🥀', '🍃'];
+            for(let i=0; i<30; i++) {
+                const f = document.createElement('div');
+                f.className = 'falling-item';
+                f.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                f.style.left = Math.random() * 100 + 'vw';
+                f.style.top = '-50px';
+                f.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                f.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(f);
+                setTimeout(() => f.remove(), 5000);
             }
         }
     </script>
