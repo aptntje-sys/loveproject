@@ -4,45 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إلى ست البنات ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); }
+        :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); --light-pink: #ffb6c1; }
         * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
         body { margin: 0; background: #0f0101; color: white; overflow-x: hidden; text-align: center; }
         
         .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--d) infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        .heart { position: absolute; color: var(--gold); opacity: 0.4; animation: floatUp 5s infinite linear; }
+        .heart { position: absolute; color: var(--gold); opacity: 0.3; animation: floatUp 5s infinite linear; }
         @keyframes floatUp { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
 
         section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
-        .active { display: flex; animation: fadeIn 0.8s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .active { display: flex; }
 
         .glass-box { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 35px 20px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); }
         
-        /* تكبير الصورة جداً وتوضيحها */
-        .profile-container { position: relative; width: 220px; height: 220px; margin: 0 auto 25px; }
-        .profile-img { width: 100%; height: 100%; border-radius: 50%; border: 5px solid var(--gold); object-fit: cover; box-shadow: 0 0 30px rgba(197, 160, 89, 0.6); display: block; background: #222; }
+        .profile-img { width: 230px; height: 230px; border-radius: 50%; border: 5px solid var(--gold); object-fit: cover; margin-bottom: 25px; box-shadow: 0 0 30px rgba(197, 160, 89, 0.4); background: #222; }
 
         input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 20px; border: 1.5px solid var(--gold); background: rgba(0,0,0,0.6); color: white; text-align: center; font-size: 18px; outline: none; }
-        button { background: var(--gold); color: #1a0101; border: none; padding: 14px 40px; border-radius: 30px; font-weight: 800; cursor: pointer; transition: 0.4s; margin: 10px 5px; font-size: 16px; }
-        button:hover { transform: scale(1.08); background: #dec085; }
-
-        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin: 20px 0; }
+        button { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 30px; font-weight: 800; cursor: pointer; transition: 0.3s; margin: 10px 5px; }
+        
+        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 20px 0; }
         .time-card { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 20px; border-bottom: 3px solid var(--gold); }
-        .time-card span { display: block; font-size: 26px; color: var(--gold); font-weight: 800; }
-        .time-card label { font-size: 14px; opacity: 0.8; }
+        .time-card span { display: block; font-size: 24px; color: var(--gold); font-weight: 800; }
 
         .photo-list { width: 100%; max-width: 450px; }
-        .photo-item { background: var(--glass); border-radius: 25px; padding: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .photo-item { background: var(--glass); border-radius: 25px; padding: 12px; margin-bottom: 30px; }
         .photo-item img { width: 100%; border-radius: 20px; }
-        .photo-item p { font-size: 16px; font-weight: 500; margin-top: 15px; line-height: 1.6; }
 
-        #typewriter { line-height: 1.9; font-size: 18px; color: #fff; text-align: right; font-weight: 500; }
-        .typewriter-cursor::after { content: '|'; animation: blink 1s step-end infinite; color: var(--gold); }
-        @keyframes blink { from, to { opacity: 1; } 50% { opacity: 0; } }
+        #typewriter { line-height: 1.9; font-size: 18px; color: #fff; text-align: right; }
+        .cursor::after { content: '|'; animation: blink 1s infinite; color: var(--gold); }
+        @keyframes blink { 50% { opacity: 0; } }
 
         .falling-flower { position: fixed; font-size: 28px; z-index: 999; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
@@ -51,36 +45,34 @@
 <body>
 
     <div class="bg-container" id="bg"></div>
-    <div class="music-control" id="mBtn" style="position:fixed; top:20px; left:20px; z-index:100; background:var(--glass); padding:12px; border-radius:50%; border:1px solid var(--gold); display:none; cursor:pointer;" onclick="toggleM()">🎵</div>
+    <div class="music-control" id="mBtn" style="position:fixed; top:20px; left:20px; z-index:100; background:var(--glass); padding:10px; border-radius:50%; border:1px solid var(--gold); display:none; cursor:pointer;" onclick="toggleM()">🎵</div>
     <audio id="audio" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
 
     <section id="p1" class="active">
         <div class="glass-box">
-            <div class="profile-container">
-                <img src="couple.jpg" class="profile-img" onerror="this.src='https://via.placeholder.com/200?text=Couple+Photo'">
-            </div>
-            <h2 id="welcome-text" style="color: var(--gold); font-weight: 800; font-size: 24px;" class="typewriter-cursor"></h2>
+            <img src="couple.jpg" class="profile-img" onerror="this.src='https://via.placeholder.com/230?text=Photo+Error'">
+            <h2 id="welcome-text" style="color: var(--gold); min-height: 35px;" class="cursor"></h2>
             <input type="text" id="pw" placeholder="الباسورد يا دكتورة 😉">
-            <button onclick="step2()">دخول ❤️</button>
+            <button onclick="checkPw()">دخول ❤️</button>
         </div>
     </section>
 
     <section id="p2">
         <div class="glass-box">
-            <h3 style="color: var(--gold); font-weight: 800; font-size: 22px;">حكايتنا بدأت من..</h3>
+            <h3 style="color: var(--gold); font-weight: 800;">حكايتنا بدأت من..</h3>
             <div class="timer-grid">
                 <div class="time-card"><span id="dd">0</span><label>يوم</label></div>
                 <div class="time-card"><span id="hh">0</span><label>ساعة</label></div>
                 <div class="time-card"><span id="mm">0</span><label>دقيقة</label></div>
                 <div class="time-card"><span id="ss">0</span><label>ثانية</label></div>
             </div>
-            <div style="background: var(--gold); color: #000; padding: 6px 25px; border-radius: 25px; font-weight: 800; font-size:15px; display:inline-block;">14-04-2023</div>
-            <button onclick="step3()" style="margin-top:25px;">ذكرياتنا 📸</button>
+            <div style="background: var(--gold); color: #000; padding: 5px 20px; border-radius: 20px; font-weight: 800;">14-04-2023</div>
+            <button onclick="showPage('p3')">ذكرياتنا 📸</button>
         </div>
     </section>
 
     <section id="p3" style="justify-content: flex-start; padding-top: 50px;">
-        <h2 style="color: var(--gold); font-weight: 800; margin-bottom: 35px;">أجمل لحظاتنا ❤️</h2>
+        <h2 style="color: var(--gold); font-weight: 800; margin-bottom: 30px;">أجمل لحظاتنا ❤️</h2>
         <div class="photo-list">
             <div class="photo-item"><img src="m1"><p>أول ضحكة صافية ❤️</p></div>
             <div class="photo-item"><img src="m2"><p>البدايات اللي منسيتهاش ❤️</p></div>
@@ -88,99 +80,98 @@
             <div class="photo-item"><img src="m4"><p>كل تفصيلة معاكي حياة ❤️</p></div>
             <div class="photo-item"><img src="m5"><p>سندي في الدنيا ❤️</p></div>
         </div>
-        <button onclick="step4()" style="margin: 30px 0;">المفاجأة 🎁</button>
+        <button onclick="startFinalPage()">المفاجأة 🎁</button>
     </section>
 
     <section id="p4">
-        <div class="glass-box" style="border: 2px dashed var(--gold); min-height: 280px; padding: 30px;">
-            <div id="typewriter" class="typewriter-cursor"></div>
+        <div class="glass-box" style="border: 2px dashed var(--gold); min-height: 250px;">
+            <div id="typewriter" class="cursor"></div>
         </div>
         
-        <div class="glass-box" style="margin-top:25px; padding:20px;">
-            <h4 style="margin:0; color:var(--gold); font-weight: 800;">باقي على يومنا الكبير 😉💍</h4>
-            <div id="engagement-timer" style="font-size: 22px; margin-top:12px; font-weight:800; color: #fff;"></div>
+        <div class="glass-box" style="margin-top:20px; padding:20px;">
+            <h4 style="margin:0; color:var(--gold); font-weight: 800;">باقي على يومنا الكبير إن شاء الله 😉💍</h4>
+            <div id="engagement-timer" style="font-size: 20px; margin-top:10px; font-weight:800;"></div>
         </div>
 
-        <div style="margin-top: 30px;">
-            <button onclick="giveFlower()" style="background: #ff4081; color: white; padding: 15px 50px;">خدي وردة 🌸</button>
-        </div>
+        <button onclick="giveFlower()" style="background: var(--light-pink); color: #4a0404; margin-top: 20px;">خدي وردة 🌸</button>
     </section>
 
     <script>
-        function initBg() {
-            const bg = document.getElementById('bg');
-            for(let i=0; i<65; i++) {
-                const s = document.createElement('div');
-                s.className = 'star';
-                s.style.width = s.style.height = Math.random() * 3 + 'px';
-                s.style.left = Math.random() * 100 + 'vw';
-                s.style.top = Math.random() * 100 + 'vh';
-                s.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
-                bg.appendChild(s);
-            }
-            setInterval(() => {
-                const h = document.createElement('div');
-                h.innerHTML = '❤️'; h.className = 'heart';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.fontSize = (Math.random() * 10 + 12) + 'px';
-                bg.appendChild(h);
-                setTimeout(() => h.remove(), 5000);
-            }, 700);
+        // الخلفية
+        const bg = document.getElementById('bg');
+        for(let i=0; i<50; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+            s.style.width = s.style.height = Math.random()*3+'px';
+            s.style.left = Math.random()*100+'vw';
+            s.style.top = Math.random()*100+'vh';
+            s.style.setProperty('--d', (Math.random()*3+2)+'s');
+            bg.appendChild(s);
         }
-        initBg();
 
-        function typeText(elementId, text, speed, callback) {
+        // تأثير الكتابة
+        function typeWriter(id, text, speed, callback) {
             let i = 0;
-            const el = document.getElementById(elementId);
+            const el = document.getElementById(id);
             el.innerHTML = "";
             function type() {
                 if (i < text.length) {
                     el.innerHTML += text.charAt(i);
-                    i++; setTimeout(type, speed);
+                    i++;
+                    setTimeout(type, speed);
                 } else if (callback) callback();
             }
             type();
         }
 
+        // عند التحميل
         window.onload = () => {
-            setTimeout(() => typeText("welcome-text", "نورتي قلبي يا دكتورة 😉", 90), 700);
+            setTimeout(() => {
+                typeWriter("welcome-text", "نورتي قلبي يا دكتورة 😉", 100);
+            }, 500);
         };
 
-        const finalMsg = "يا أغلى من روحي ☺️ أنا قاعد دلوقتي بفكر فيكي ولقيت نفسي عايز أكتبلك كلام كتير رغم إنك عارفة إن الكلام ساعات بيخوني وما بيعرفش يوصف اللي جوايا صح 👀 بس بجد أنا كل يوم بكتشف إن وجودك في حياتي ده أكبر نعمة ربنا رزقني بيها.. أنتي مش بس حبيبتي، أنتي نصيبي الحلو من الدنيا والضحكة اللي بتطلع من قلبي بجد مهما كنت شايل هموم 🫂 عارفة؟ أنا بحب تفاصيلك الصغيرة اللي ممكن محدش ياخد باله منها، بحب طريقتك في الكلام (بس ميمنعش إنك عبيطة 😂)، وبحب إنك دايماً بتعرفي تطمنيني بمجرد كلمة منك.. معاكي بحس إن الدنيا لسه بخير وبحس إن عندي طاقة أهد جبال عشان بس أشوفك مبسوطة ومرتاحة.. أنتي السند والكتف اللي برمي عليه تعبي وببقى عارف إني هقوم أقوى بيكي. نفسي تعرفي إن مفيش حد في الدنيا ممكن ياخد مكانك ولا فيه حاجة تعوضني عنك، أنا عايش عشان اللحظة اللي نكون فيها سوا في بيتنا ونبني كل الأحلام اللي حلمنا بيها مع بعض.. هفضل دايماً جنبك وفي ضهرك ومعاكي في المرة قبل الحلوة عشان أنتي تستاهلي كل حاجة حلوة يا حلوة 😉🌍";
-
-        function step2() {
+        function checkPw() {
             if(document.getElementById('pw').value === 'mab14') {
-                show('p2'); document.getElementById('audio').play();
+                showPage('p2');
+                document.getElementById('audio').play();
                 document.getElementById('mBtn').style.display = 'block';
                 setInterval(updateTimers, 1000);
             } else { alert("الباسورد غلط يا دكتورة! 😉"); }
         }
 
-        function step3() { show('p3'); }
-        function step4() { 
-            show('p4'); 
-            setTimeout(() => typeText("typewriter", finalMsg, 45), 600);
-        }
-
-        function show(id) {
+        function showPage(id) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
 
+        const msg = "يا أغلى من روحي ☺️ أنا قاعد دلوقتي بفكر فيكي ولقيت نفسي عايز أكتبلك كلام كتير رغم إنك عارفة إن الكلام ساعات بيخوني وما بيعرفش يوصف اللي جوايا صح 👀 بس بجد أنا كل يوم بكتشف إن وجودك في حياتي ده أكبر نعمة ربنا رزقني بيها.. أنتي مش بس حبيبتي، أنتي نصيبي الحلو من الدنيا والضحكة اللي بتطلع من قلبي بجد مهما كنت شايل هموم 🫂 عارفة؟ أنا بحب تفاصيلك الصغيرة اللي ممكن محدش ياخد باله منها، بحب طريقتك في الكلام (بس ميمنعش إنك عبيطة 😂)، وبحب إنك دايماً بتعرفي تطمنيني بمجرد كلمة منك.. معاكي بحس إن الدنيا لسه بخير وبحس إن عندي طاقة أهد جبال عشان بس أشوفك مبسوطة ومرتاحة.. أنتي السند والكتف اللي برمي عليه تعبي وببقى عارف إني هقوم أقوى بيكي. نفسي تعرفي إن مفيش حد في الدنيا ممكن ياخد مكانك ولا فيه حاجة تعوضني عنك، أنا عايش عشان اللحظة اللي نكون فيها سوا في بيتنا ونبني كل الأحلام اللي حلمنا بيها مع بعض.. هفضل دايماً جنبك وفي ضهرك ومعاكي في المرة قبل الحلوة عشان أنتي تستاهلي كل حاجة حلوة يا حلوة 😉🌍";
+
+        function startFinalPage() {
+            showPage('p4');
+            setTimeout(() => {
+                typeWriter("typewriter", msg, 45);
+            }, 500);
+        }
+
         function updateTimers() {
-            const diff1 = new Date() - new Date("2023-04-14T00:00:00");
+            const start = new Date("2023-04-14T00:00:00");
+            const now = new Date();
+            const diff1 = now - start;
             document.getElementById("dd").innerText = Math.floor(diff1 / 86400000);
             document.getElementById("hh").innerText = Math.floor((diff1 / 3600000) % 24);
             document.getElementById("mm").innerText = Math.floor((diff1 / 60000) % 60);
             document.getElementById("ss").innerText = Math.floor((diff1 / 1000) % 60);
 
+            // عداد الخطوبة (سنة وشهور)
             const target = new Date("2027-10-14T00:00:00");
-            const diff2 = target - new Date();
+            const diff2 = target - now;
             if (diff2 > 0) {
-                const days = Math.floor(diff2 / 86400000);
-                const hrs = Math.floor((diff2 / 3600000) % 24);
-                document.getElementById("engagement-timer").innerText = `${days} يوم و ${hrs} ساعة`;
+                const totalMonths = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
+                const yrs = Math.floor(totalMonths / 12);
+                const mos = totalMonths % 12;
+                document.getElementById("engagement-timer").innerText = `${yrs} سنة و ${mos} شهر`;
             } else {
                 document.getElementById("engagement-timer").innerText = "حان الوقت يا بطل! 💍";
             }
@@ -190,10 +181,10 @@
             for(let i=0; i<15; i++) {
                 const f = document.createElement('div');
                 f.className = 'falling-flower';
-                f.innerHTML = ['🌸','🌹','🌷','🌺','💖','✨'][Math.floor(Math.random()*6)];
-                f.style.left = Math.random() * 100 + 'vw';
+                f.innerHTML = ['🌸','🌹','🌷','🌺'][Math.floor(Math.random()*4)];
+                f.style.left = Math.random()*100+'vw';
                 f.style.top = '-50px';
-                f.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                f.style.animationDuration = (Math.random()*2+2)+'s';
                 document.body.appendChild(f);
                 setTimeout(() => f.remove(), 4000);
             }
