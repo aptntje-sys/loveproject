@@ -32,6 +32,8 @@
         .photo-item p { font-size: 14px; margin-top: 12px; color: #eee; }
 
         .music-control { position: fixed; top: 15px; left: 15px; z-index: 100; background: var(--glass); padding: 8px 15px; border-radius: 30px; border: 1px solid var(--gold); display: none; font-size: 12px; cursor: pointer; }
+        
+        #typewriter { line-height: 1.8; font-size: 17px; color: #fdfdfd; text-align: right; }
     </style>
 </head>
 <body>
@@ -77,8 +79,8 @@
 
     <section id="p4">
         <p style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">الرسالة دي ليكي يا ست البنات</p>
-        <div class="glass-box" style="border: 2px dashed var(--gold); line-height: 1.8;">
-            <p>"يا ست البنات، من يوم 14-4-2023 وحياتي اتغيرت تماماً.. بحبك للأبد ❤️"</p>
+        <div class="glass-box" style="border: 2px dashed var(--gold); min-height: 200px;">
+            <div id="typewriter"></div>
         </div>
         <div style="font-size: 30px; margin-top: 20px;">❤️❤️❤️</div>
     </section>
@@ -104,8 +106,26 @@
                 setInterval(updateT, 1000);
             } else { alert("الباسورد غلط يا قمر! 😉"); }
         }
+
         function step3() { show('p3'); }
-        function step4() { show('p4'); }
+
+        const messageText = "يا أغلى من روحي ☺️ أنا قاعد دلوقتي بفكر فيكي ولقيت نفسي عايز أكتبلك كلام كتير رغم إنك عارفة إن الكلام ساعات بيخوني وما بيعرفش يوصف اللي جوايا صح 👀 بس بجد أنا كل يوم بكتشف إن وجودك في حياتي ده أكبر نعمة ربنا رزقني بيها.. أنتي مش بس حبيبتي، أنتي نصيبي الحلو من الدنيا والضحكة اللي بتطلع من قلبي بجد مهما كنت شايل هموم 🫂 عارفة؟ أنا بحب تفاصيلك الصغيرة اللي ممكن محدش ياخد باله منها، بحب طريقتك في الكلام (بس ميمنعش إنك عبيطة 😂)، وبحب إنك دايماً بتعرفي تطمنيني بمجرد كلمة منك.. معاكي بحس إن الدنيا لسه بخير وبحس إن عندي طاقة أهد جبال عشان بس أشوفك مبسوطة ومرتاحة.. أنتي السند والكتف اللي برمي عليه تعبي وببقى عارف إني هقوم أقوى بيكي. نفسي تعرفي إن مفيش حد في الدنيا ممكن ياخد مكانك ولا فيه حاجة تعوضني عنك، أنا عايش عشان اللحظة اللي نكون فيها سوا في بيتنا ونبني كل الأحلام اللي حلمنا بيها مع بعض.. هفضل دايماً جنبك وفي ضهرك ومعاكي في المرة قبل الحلوة عشان أنتي تستاهلي كل حاجة حلوة يا حلوة 😉🌍";
+
+        let index = 0;
+        function typeWriter() {
+            if (index < messageText.length) {
+                document.getElementById("typewriter").innerHTML += messageText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 40);
+            }
+        }
+
+        function step4() { 
+            show('p4');
+            document.getElementById("typewriter").innerHTML = "";
+            index = 0;
+            setTimeout(typeWriter, 800);
+        }
 
         function show(id) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -128,4 +148,3 @@
     </script>
 </body>
 </html>
-
