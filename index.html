@@ -3,63 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حكايتنا ❤️</title>
+    <title>إلى ست البنات ❤️</title>
     <style>
-        :root { --primary: #ff4d6d; --bg: #1a0005; }
-        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
-        .container { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding: 40px 20px; border-radius: 30px; text-align: center; width: 85%; max-width: 400px; z-index: 10; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
-        h1 { color: var(--primary); font-size: 28px; margin-bottom: 10px; text-shadow: 0 0 15px var(--primary); }
-        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
-        .time-card { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; border-bottom: 3px solid var(--primary); }
-        .time-card span { display: block; font-size: 22px; font-weight: bold; }
-        .time-card label { font-size: 12px; opacity: 0.7; }
-        .date-badge { background: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 14px; display: inline-block; margin-top: 10px; }
-        .heart-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-        @keyframes float { 0% { transform: translateY(110vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
-        .floating-heart { position: absolute; color: var(--primary); font-size: 20px; animation: float 4s linear infinite; }
+        :root { --main-color: #720917; --gold: #d4af37; --glass: rgba(255, 255, 255, 0.1); }
+        body { margin: 0; background: linear-gradient(135deg, #2b0308 0%, #720917 100%); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; display: none; }
+        .active { display: flex; animation: fadeIn 1s ease; }
+        
+        /* Glass Box Style */
+        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; padding: 30px; text-align: center; width: 90%; max-width: 450px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        
+        /* Inputs & Buttons */
+        input { width: 80%; padding: 12px; margin: 15px 0; border-radius: 15px; border: 1px solid var(--gold); background: rgba(0,0,0,0.3); color: white; text-align: center; font-size: 18px; }
+        button { background: var(--gold); color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--gold); }
+
+        /* Timer Cards */
+        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+        .time-item { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 12px; border-bottom: 2px solid var(--gold); }
+        .time-item span { display: block; font-size: 20px; font-weight: bold; color: var(--gold); }
+
+        /* Memories Section */
+        .memories-container { width: 100%; max-width: 500px; }
+        .photo-frame { margin-bottom: 30px; }
+        .photo-frame img { width: 100%; border-radius: 20px; border: 3px solid var(--glass); }
+        .photo-caption { font-size: 14px; margin-top: 8px; color: #eee; font-style: italic; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .heart { position: absolute; color: var(--gold); animation: floatUp 4s infinite linear; opacity: 0.6; z-index: -1; }
+        @keyframes floatUp { from { transform: translateY(100vh); } to { transform: translateY(-10vh); } }
     </style>
 </head>
 <body>
-    <div class="heart-bg" id="bg"></div>
-    <div class="container">
-        <div style="font-size: 50px;">❤️</div>
-        <h1>كل ثانية وأنتي في قلبي</h1>
-        <p style="opacity: 0.8;">بدايتنا كانت وما زالت أجمل حكاية</p>
-        
-        <div class="timer-grid">
-            <div class="time-card"><span id="days">0</span><label>يوم</label></div>
-            <div class="time-card"><span id="hours">0</span><label>ساعة</label></div>
-            <div class="time-card"><span id="mins">0</span><label>دقيقة</label></div>
-            <div class="time-card"><span id="secs">0</span><label>ثانية</label></div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <section id="page1" class="active">
+        <div class="glass-card">
+            <h1 style="color: var(--gold);">نورتي قلبي ❤️</h1>
+            <p>انتي أجمل صدفة في حياتي، ومكانك هنا دايماً محمي.</p>
+            <input type="password" id="passwordInput" placeholder="اكتبي الباسورد 😉">
+            <button onclick="unlock()">دخول</button>
+        </div>
+    </section>
+
+    <section id="page2">
+        <div class="glass-card">
+            <h2 style="color: var(--gold);">الوقت اللي عشناه سوا ❤️</h2>
+            <div class="timer-grid">
+                <div class="time-item"><span id="days">0</span> يوم</div>
+                <div class="time-item"><span id="hours">0</span> ساعة</div>
+                <div class="time-item"><span id="mins">0</span> دقيقة</div>
+                <div class="time-item"><span id="secs">0</span> ثانية</div>
+            </div>
+            <div style="background: var(--glass); padding: 5px 15px; border-radius: 10px; display: inline-block; font-size: 14px;">الذكريات</div>
+            <p style="font-size: 12px; margin-top: 5px;">يله بينا نشوف الذكريات الحلوة</p>
         </div>
 
-        <div class="date-badge">14-04-2023</div>
-    </div>
+        <div class="memories-container" style="margin-top: 40px;">
+            <div class="photo-frame">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500" alt="ذكرى">
+                <div class="photo-caption">الصورة دي كانت حلوة، مش بتتشال من البال ❤️</div>
+            </div>
+            <div class="photo-frame">
+                <img src="https://images.unsplash.com/photo-1516589174184-c685266d4301?q=80&w=500" alt="ذكرى">
+                <div class="photo-caption">ضحكتك هنا كانت منورة الدنيا.. أجمل يوم ❤️</div>
+            </div>
+        </div>
+
+        <button onclick="showSurprise()">شوفي المفاجأة 🎁</button>
+    </section>
+
+    <section id="page3">
+        <p style="color: var(--gold); font-size: 18px;">الرسالة دي ليكي يا ست البنات</p>
+        <div class="glass-card" style="padding: 40px;">
+            <p style="line-height: 1.8; font-size: 18px;">
+                "إلى رفيقة دربي، كل يوم بيعدي وأنا معاكي بتأكد إنك أحلى اختيار في حياتي. 
+                من يوم 14-4-2023 وأنا حاسس إن العالم بقى أجمل بكتير. 
+                انتي مش بس زوجتي، انتي سندي وحبيبتي وكل دنيتي. 
+                يا رب نفضل دايماً مع بعض ونكمل ذكرياتنا اللي مش بتخلص." 
+                <br><br>
+                بحبك للأبد ❤️
+            </p>
+        </div>
+        <div style="font-size: 40px; margin-top: 20px;">❤️❤️❤️</div>
+    </section>
 
     <script>
-        function update() {
-            const start = new Date("2023-04-14T00:00:00");
-            const now = new Date();
-            const diff = now - start;
+        // التحقق من الباسورد وتشغيل الموسيقى
+        function unlock() {
+            const pass = document.getElementById('passwordInput').value;
+            if(pass === 'mab14') {
+                document.getElementById('bgMusic').play();
+                document.getElementById('page1').classList.remove('active');
+                document.getElementById('page2').classList.add('active');
+                setInterval(updateTimer, 1000);
+                startHearts();
+            } else {
+                alert("الباسورد غلط يا قمر! 😉");
+            }
+        }
+
+        // الانتقال للمفاجأة
+        function showSurprise() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page3').classList.add('active');
+        }
+
+        // العداد الزمني
+        function updateTimer() {
+            const diff = new Date() - new Date("2023-04-14");
             document.getElementById("days").innerText = Math.floor(diff / 86400000);
             document.getElementById("hours").innerText = Math.floor((diff / 3600000) % 24);
             document.getElementById("mins").innerText = Math.floor((diff / 60000) % 60);
             document.getElementById("secs").innerText = Math.floor((diff / 1000) % 60);
         }
-        setInterval(update, 1000);
-        update();
 
-        function createHeart() {
-            const h = document.createElement("div");
-            h.innerHTML = "❤️";
-            h.className = "floating-heart";
-            h.style.left = Math.random() * 100 + "vw";
-            h.style.animationDuration = (Math.random() * 2 + 3) + "s";
-            h.style.opacity = Math.random();
-            document.getElementById("bg").appendChild(h);
-            setTimeout(() => h.remove(), 5000);
+        // تأثير القلوب المتطايرة
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.className = "heart";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 400);
         }
-        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
