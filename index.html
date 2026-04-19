@@ -9,33 +9,21 @@
         :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.08); }
         * { box-sizing: border-box; font-family: 'Cairo', sans-serif; }
         body { margin: 0; background: #1a0101; color: white; overflow-x: hidden; text-align: center; }
-        
-        /* قلوب الخلفية ثابتة */
         .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .heart { position: absolute; color: var(--gold); opacity: 0.5; animation: floatUp 5s infinite linear; }
         @keyframes floatUp { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
-
         section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
         .active { display: flex; animation: fadeIn 0.6s ease-in; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         .glass-box { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 40px 20px; width: 95%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-        
         input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 15px; border: 1px solid var(--gold); background: rgba(0,0,0,0.4); color: white; font-size: 16px; outline: none; text-align: center; }
         button { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; }
-
-        /* العداد المطور */
         .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 20px 0; }
         .time-card { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px; border-bottom: 2px solid var(--gold); }
         .time-card span { display: block; font-size: 24px; color: var(--gold); font-weight: bold; }
-        .time-card label { font-size: 12px; opacity: 0.7; }
-
-        /* معرض الصور المنفصل */
         .photo-list { width: 100%; max-width: 450px; }
         .photo-item { background: var(--glass); border-radius: 20px; padding: 10px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
         .photo-item img { width: 100%; border-radius: 15px; display: block; }
-        .photo-item p { font-size: 14px; margin-top: 12px; color: #eee; }
-
         .music-control { position: fixed; top: 15px; left: 15px; z-index: 100; background: var(--glass); padding: 8px 15px; border-radius: 30px; border: 1px solid var(--gold); display: none; font-size: 12px; cursor: pointer; }
     </style>
 </head>
@@ -43,7 +31,7 @@
 
     <div class="bg-hearts" id="hearts"></div>
     <div class="music-control" id="mBtn" onclick="toggleM()">🎵 تشغيل/إيقاف الموسيقى</div>
-    <audio id="audio" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
+    <audio id="audio" loop><source src="رابط_الاغنية_من_موقع_catbox_هنا" type="audio/mpeg"></audio>
 
     <section id="p1" class="active">
         <div class="glass-box">
@@ -63,30 +51,18 @@
                 <div class="time-card"><span id="ss">0</span><label>ثانية</label></div>
             </div>
             <div style="background: var(--gold); color: #000; padding: 5px 20px; border-radius: 20px; font-weight: bold; margin: 10px 0;">14-04-2023</div>
-            <p style="font-size: 13px; margin-top: 20px;">يله بينا نشوف الذكريات الحلوة بخط صغير</p>
             <button onclick="step3()">شوفي الذكريات 📸</button>
         </div>
     </section>
 
     <section id="p3" style="justify-content: flex-start; padding-top: 40px;">
-        <h2 style="color: var(--gold); margin-bottom: 30px;">ذكرياتنا اللي مش بتخلص ❤️</h2>
+        <h2 style="color: var(--gold); margin-bottom: 30px;">ذكرياتنا الحلوة ❤️</h2>
         <div class="photo-list">
-            <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="">
-                <p>الصورة دي كانت حلوة، مش بتتشال من البال ❤️</p>
-            </div>
-            <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1516589174184-c685266d4301?w=500" alt="">
-                <p>اللحظة دي كانت بداية لكل حاجة حلوة في دنيتي ❤️</p>
-            </div>
-            <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1522673607200-164883e25bb2?w=500" alt="">
-                <p>ضحكتك في الصورة دي هي سبب فرحتي دايماً ❤️</p>
-            </div>
-            <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=500" alt="">
-                <p>كل تفصيلة في اليوم ده محفورة في قلبي ❤️</p>
-            </div>
+            <div class="photo-item"><img src="1.jpg"><p>الصورة دي كانت حلوة، مش بتتشال من البال ❤️</p></div>
+            <div class="photo-item"><img src="2.jpg"><p>اللحظة دي كانت بداية لكل حاجة حلوة ❤️</p></div>
+            <div class="photo-item"><img src="3.jpg"><p>ضحكتك في الصورة دي سبب فرحتي ❤️</p></div>
+            <div class="photo-item"><img src="4.jpg"><p>كل تفصيلة هنا محفورة في قلبي ❤️</p></div>
+            <div class="photo-item"><img src="5.jpg"><p>أجمل ذكرى مع أغلى إنسانة ❤️</p></div>
         </div>
         <button onclick="step4()" style="margin: 40px 0;">شوفي المفاجأة 🎁</button>
     </section>
@@ -94,14 +70,8 @@
     <section id="p4">
         <p style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">الرسالة دي ليكي يا ست البنات</p>
         <div class="glass-box" style="border: 2px dashed var(--gold); line-height: 1.8;">
-            <p>
-                "يا ست البنات، من يوم 14-4-2023 وحياتي اتغيرت تماماً. 
-                انتي النعمة اللي بشكر ربنا عليها كل يوم. 
-                عملتلك المكان ده عشان يفضل شاهد على كل ثانية عشناها سوا، 
-                وعشان تعرفي إنك أغلى حاجة في حياتي.. بحبك للأبد ❤️"
-            </p>
+            <p>"يا ست البنات، من يوم 14-4-2023 وحياتي اتغيرت تماماً.. بحبك للأبد ❤️"</p>
         </div>
-        <div style="font-size: 30px; margin-top: 20px;">❤️❤️❤️</div>
     </section>
 
     <script>
@@ -116,7 +86,6 @@
             }
         }
         createHearts();
-
         function step2() {
             if(document.getElementById('pw').value === 'mab14') {
                 show('p2');
@@ -127,18 +96,15 @@
         }
         function step3() { show('p3'); }
         function step4() { show('p4'); }
-
         function show(id) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
-
         function toggleM() {
             const a = document.getElementById('audio');
             a.paused ? a.play() : a.pause();
         }
-
         function updateT() {
             const diff = new Date() - new Date("2023-04-14T00:00:00");
             document.getElementById("dd").innerText = Math.floor(diff / 86400000);
