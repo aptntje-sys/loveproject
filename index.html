@@ -6,15 +6,24 @@
     <title>إلى ست البنات ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); --light-pink: #ffb6c1; }
+        :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); --light-pink: #ffb6c1; --pink-glow: rgba(255, 182, 193, 0.2); }
         * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-        body { margin: 0; background: #0f0101; color: white; overflow-x: hidden; text-align: center; }
+        
+        body { 
+            margin: 0; 
+            background: #0f0101; 
+            color: white; 
+            overflow-x: hidden; 
+            text-align: center; 
+            /* إضاءة بينك خفيفة في الجوانب */
+            box-shadow: inset 0 0 100px var(--pink-glow);
+            min-height: 100vh;
+        }
         
         .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--d) infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
         
-        /* تكثيف القلوب جداً */
         .bg-heart { position: absolute; color: #ffb6c1; opacity: 0.7; animation: floatUp 4s infinite linear; pointer-events: none; }
         @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
 
@@ -29,7 +38,6 @@
         input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 20px; border: 1.5px solid var(--gold); background: rgba(0,0,0,0.6); color: white; text-align: center; font-size: 18px; outline: none; }
         button { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 30px; font-weight: 800; cursor: pointer; transition: 0.3s; margin: 10px 5px; box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); }
         
-        /* مشغل الموسيقى الشيك */
         .music-oval { background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(197, 160, 89, 0.2)); border: 1.5px solid var(--gold); border-radius: 50px; padding: 10px 30px; margin: 25px 0; display: inline-flex; align-items: center; gap: 20px; cursor: pointer; transition: 0.4s; box-shadow: 0 0 20px rgba(197, 160, 89, 0.2); }
         .music-note { font-size: 24px; animation: spin 3s infinite linear; display: inline-block; color: var(--gold); }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -39,7 +47,6 @@
         .time-card { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 20px; border-bottom: 3px solid var(--gold); }
         .time-card span { display: block; font-size: 24px; color: var(--gold); font-weight: 800; }
 
-        /* فريم الصور الدهبي */
         .photo-list { width: 100%; max-width: 450px; }
         .photo-item { background: var(--glass); border-radius: 25px; padding: 10px; margin-bottom: 35px; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(197, 160, 89, 0.2); }
         .photo-item img { width: 100%; border-radius: 18px; display: block; }
@@ -80,7 +87,6 @@
             <div class="photo-item" style="margin-bottom: 20px;">
                 <img src="m6" onerror="this.src='m6.jpg'; this.onerror=function(){this.src='m6.png';}" alt="m6">
             </div>
-            
             <h3 style="color: var(--gold); font-weight: 800;">حكايتنا بدأت من..</h3>
             <div class="timer-grid">
                 <div class="time-card"><span id="dd">0</span><label>يوم</label></div>
@@ -88,13 +94,11 @@
                 <div class="time-card"><span id="mm">0</span><label>دقيقة</label></div>
                 <div class="time-card"><span id="ss">0</span><label>ثانية</label></div>
             </div>
-            
             <div class="music-oval" onclick="toggleM()">
                 <span class="music-note" id="noteIcon">🎵</span>
                 <span style="font-size: 16px; font-weight: bold; color: #fff;">أغنيتنا</span>
                 <div class="play-btn" id="playIcon">▶</div>
             </div>
-
             <button onclick="showPage('p3')">ذكرياتنا 📸</button>
         </div>
     </section>
@@ -102,11 +106,11 @@
     <section id="p3" style="justify-content: flex-start; padding-top: 50px;">
         <h2 style="color: var(--gold); font-weight: 800; margin-bottom: 30px;">أجمل لحظاتنا ❤️</h2>
         <div class="photo-list">
-            <div class="photo-item"><img src="m1" onerror="this.src='m1.jpg'; this.onerror=function(){this.src='m1.png';}"><p>أول ضحكة صافية ❤️</p></div>
-            <div class="photo-item"><img src="m2" onerror="this.src='m2.jpg'; this.onerror=function(){this.src='m2.png';}"><p>البدايات اللي منسيتهاش ❤️</p></div>
-            <div class="photo-item"><img src="m3" onerror="this.src='m3.jpg'; this.onerror=function(){this.src='m3.png';}"><p>نور عيني ❤️</p></div>
-            <div class="photo-item"><img src="m4" onerror="this.src='m4.jpg'; this.onerror=function(){this.src='m4.png';}"><p>كل تفصيلة معاكي حياة ❤️</p></div>
-            <div class="photo-item"><img src="m5" onerror="this.src='m5.jpg'; this.onerror=function(){this.src='m5.png';}"><p>سندي في الدنيا ❤️</p></div>
+            <div class="photo-item"><img src="m1" onerror="this.src='m1.jpg';"><p>أول ضحكة صافية ❤️</p></div>
+            <div class="photo-item"><img src="m2" onerror="this.src='m2.jpg';"><p>البدايات اللي منسيتهاش ❤️</p></div>
+            <div class="photo-item"><img src="m3" onerror="this.src='m3.jpg';"><p>نور عيني ❤️</p></div>
+            <div class="photo-item"><img src="m4" onerror="this.src='m4.jpg';"><p>كل تفصيلة معاكي حياة ❤️</p></div>
+            <div class="photo-item"><img src="m5" onerror="this.src='m5.jpg';"><p>سندي في الدنيا ❤️</p></div>
         </div>
         <button onclick="startFinalPage()">المفاجأة 🎁</button>
     </section>
@@ -141,11 +145,11 @@
                 h.innerHTML = '💕';
                 h.className = 'bg-heart';
                 h.style.left = Math.random()*100+'vw';
-                h.style.fontSize = (Math.random()*25 + 15)+'px'; // قلوب أكبر
-                h.style.animationDuration = (Math.random()*2 + 3)+'s'; // أسرع شوية
+                h.style.fontSize = (Math.random()*25 + 15)+'px';
+                h.style.animationDuration = (Math.random()*2 + 3)+'s';
                 bg.appendChild(h);
                 setTimeout(() => h.remove(), 5000);
-            }, 200); // كثافة عالية جداً
+            }, 200);
         }
         createElements();
 
@@ -158,15 +162,18 @@
             type();
         }
 
-        window.onload = () => {
-            setTimeout(() => { typeWriter("welcome-text", "نورتي قلبي يا دكتورة 😉", 40); }, 500);
-        };
+        // تشغيل الرسالة فور فتح الموقع بسلاسة
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                typeWriter("welcome-text", "نورتي قلبي يا دكتورة 😉", 60);
+            }, 300);
+        });
 
         function checkPw() {
             if(document.getElementById('pw').value === 'mab14') {
                 showPage('p2');
                 const audio = document.getElementById('audio');
-                audio.play();
+                audio.play().catch(() => console.log("Music needs interaction"));
                 document.getElementById('mBtn').style.display = 'flex';
                 document.getElementById('backBtn').style.display = 'flex';
                 document.getElementById('playIcon').innerText = '⏸';
@@ -237,15 +244,14 @@
                 a.play();
                 btn.classList.remove('muted');
                 playIcon.innerText = '⏸';
-                noteIcon.style.animationPlayState = 'running';
+                if(noteIcon) noteIcon.style.animationPlayState = 'running';
             } else {
                 a.pause();
                 btn.classList.add('muted');
                 playIcon.innerText = '▶';
-                noteIcon.style.animationPlayState = 'paused';
+                if(noteIcon) noteIcon.style.animationPlayState = 'paused';
             }
         }
     </script>
 </body>
 </html>
-
