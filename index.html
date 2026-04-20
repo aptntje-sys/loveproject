@@ -69,7 +69,8 @@
             width: 100%; height: 100%; border-radius: 50%; background: #0f0101;
             padding: 2px; overflow: hidden; position: relative; z-index: 2;
         }
-        .story-inner img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        /* تم إضافة video هنا ليأخذ نفس شكل الصورة في الاستوري */
+        .story-inner img, .story-inner video { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; pointer-events: none; }
         .story-label { font-size: 11px; margin-top: 8px; font-weight: 800; color: var(--gold); }
 
         /* مشغل الفيديو الـ Overlay */
@@ -175,9 +176,7 @@
     <div id="videoOverlay" class="video-overlay" onclick="closeVideo()">
         <div class="video-container" onclick="event.stopPropagation()">
             <span class="close-video" onclick="closeVideo()">×</span>
-            <video id="mainVideo" controls playsinline>
-                <source src="" type="video/mp4">
-            </video>
+            <video id="mainVideo" controls playsinline></video>
         </div>
     </div>
 
@@ -250,19 +249,35 @@
 
         <div class="stories-wrapper">
             <div onclick="openVideo('m1.mp4')">
-                <div class="story-circle"><div class="story-inner"><img src="m1"></div></div>
+                <div class="story-circle">
+                    <div class="story-inner">
+                        <video muted playsinline preload="metadata"><source src="m1.mp4#t=0.5" type="video/mp4"></video>
+                    </div>
+                </div>
                 <div class="story-label">يومنا 💓</div>
             </div>
             <div onclick="openVideo('m2.mp4')">
-                <div class="story-circle"><div class="story-inner"><img src="m2"></div></div>
+                <div class="story-circle">
+                    <div class="story-inner">
+                        <video muted playsinline preload="metadata"><source src="m2.mp4#t=0.5" type="video/mp4"></video>
+                    </div>
+                </div>
                 <div class="story-label">ضحكتك 💕</div>
             </div>
             <div onclick="openVideo('m3.mp4')">
-                <div class="story-circle"><div class="story-inner"><img src="m3"></div></div>
+                <div class="story-circle">
+                    <div class="story-inner">
+                        <video muted playsinline preload="metadata"><source src="m3.mp4#t=0.5" type="video/mp4"></video>
+                    </div>
+                </div>
                 <div class="story-label">ذكرى 👀</div>
             </div>
             <div onclick="openVideo('m4.mp4')">
-                <div class="story-circle"><div class="story-inner"><img src="m4"></div></div>
+                <div class="story-circle">
+                    <div class="story-inner">
+                        <video muted playsinline preload="metadata"><source src="m4.mp4#t=0.5" type="video/mp4"></video>
+                    </div>
+                </div>
                 <div class="story-label">انتي 👑</div>
             </div>
         </div>
@@ -400,12 +415,16 @@
             }
         }
 
+        /* تم تعديل دوال الفيديو لتعمل بشكل مثالي */
         function openVideo(src) {
             const mainAudio = document.getElementById('audio');
             const overlay = document.getElementById('videoOverlay');
             const video = document.getElementById('mainVideo');
             if (!mainAudio.paused) { mainAudio.pause(); mainAudio.wasPlaying = true; }
+            
+            // إضافة المصدر مباشرة وعمل load لضمان التشغيل
             video.src = src;
+            video.load(); 
             overlay.style.display = 'flex';
             video.play();
         }
@@ -414,8 +433,12 @@
             const mainAudio = document.getElementById('audio');
             const overlay = document.getElementById('videoOverlay');
             const video = document.getElementById('mainVideo');
+            
             video.pause();
+            video.removeAttribute('src'); // تنظيف المصدر لعدم استمرار التشغيل في الخلفية
+            video.load();
             overlay.style.display = 'none';
+            
             if (mainAudio.wasPlaying) mainAudio.play();
         }
 
