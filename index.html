@@ -34,6 +34,17 @@
             border-radius: 40px; display: flex; align-items: center; justify-content: center;
             gap: 10px; margin: 0 auto 20px auto; cursor: pointer; transition: 0.3s;
         }
+
+        /* ستايل صندوق الرسايل المخصص (الجديد) */
+        .custom-msg-box {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            background: rgba(15, 1, 1, 0.95); border: 1.5px solid var(--gold);
+            backdrop-filter: blur(15px); padding: 30px 20px; border-radius: 30px;
+            z-index: 10002; width: 85%; max-width: 350px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+        }
+        .custom-msg-box.show { transform: translate(-50%, -50%) scale(1); }
+        .msg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; z-index: 10001; }
         /* ----------------------- */
 
         section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
@@ -83,6 +94,12 @@
     <div id="mBtnFixed" class="music-control-fixed" onclick="toggleM()">🎵</div>
     
     <div id="kissBtn" class="kiss-float" onclick="giveKiss()">💋</div>
+
+    <div id="msgOverlay" class="msg-overlay" onclick="closeMagicLetter()"></div>
+    <div id="msgBox" class="custom-msg-box" onclick="closeMagicLetter()">
+        <p id="msgText" style="font-size: 20px; font-weight: bold; line-height: 1.6;"></p>
+        <div style="margin-top:15px; color:var(--gold); font-size:12px;">إلمسي الشاشة للإغلاق ✨</div>
+    </div>
 
     <audio id="audio" loop><source src="m.mp3" type="audio/mpeg"></audio>
 
@@ -149,7 +166,6 @@
         const bg = document.getElementById('bg');
         let currentStep = 1;
 
-        // مصفوفة الرسائل العشوائية
         const randomQuotes = [
             "أنتي أجمل حاجة حصلتلي 💓", "ضحكتك بتنور دنيتي والله 👀", "يا وش السعد عليا يا قمر 🌙", 
             "كل يوم بحبك أكتر من اللي قبله 💍", "أنتي ست البنات وكل البنات 👑", "ربنا يخليكي ليا وميحرمنيش منك 🫂",
@@ -179,7 +195,6 @@
         }
         createElements();
 
-        // إضافة تأثير النجوم عند الحركة
         document.addEventListener('mousemove', (e) => spawnMagic(e.clientX, e.clientY));
         document.addEventListener('touchstart', (e) => spawnMagic(e.touches[0].clientX, e.touches[0].clientY));
         function spawnMagic(x, y) {
@@ -206,7 +221,7 @@
                 document.getElementById('audio').play();
                 document.getElementById('mBtnFixed').style.display = 'flex';
                 document.getElementById('backBtn').style.display = 'flex';
-                document.getElementById('kissBtn').style.display = 'flex'; // إظهار زرار البوسة
+                document.getElementById('kissBtn').style.display = 'flex';
                 setInterval(updateTimers, 1000);
             } else { alert("الباسورد غلط يا دكتورة! 😉"); }
         }
@@ -265,9 +280,17 @@
             }
         }
 
+        /* وظائف الرسائل العشوائية الجديدة (بدل الـ alert) */
         function openMagicLetter() {
             const randomMsg = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
-            alert("💌 رسالة ليكي: \n\n" + randomMsg);
+            document.getElementById('msgText').innerText = randomMsg;
+            document.getElementById('msgOverlay').style.display = 'block';
+            document.getElementById('msgBox').classList.add('show');
+        }
+
+        function closeMagicLetter() {
+            document.getElementById('msgOverlay').style.display = 'none';
+            document.getElementById('msgBox').classList.remove('show');
         }
 
         function toggleM() {
@@ -280,3 +303,4 @@
     </script>
 </body>
 </html>
+
