@@ -92,11 +92,13 @@
         .note-icon { font-size: 20px; animation: rotating 3s infinite linear; display: inline-block; }
         @keyframes rotating { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* الكروت الجديدة بتأثير النبض والتوهج */
+        /* الكروت: تم إزالة الأنيميشن من الـ flip-card وإضافته لحاوية خارجية لضمان عمل القلب */
         .cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-bottom: 30px; perspective: 1000px; }
+        
+        .card-pulse-wrapper { animation: smooth-pulse 2.5s infinite ease-in-out; } /* نبض خارجي */
+        
         .flip-card { 
-            width: 100%; height: 125px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.6s; 
-            animation: smooth-pulse 2.5s infinite ease-in-out; /* حركة النبض */
+            width: 100%; height: 125px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
         }
         .flip-card.flipped { transform: rotateY(180deg); }
         .card-front, .card-back {
@@ -189,24 +191,32 @@
         <div class="glass-box" style="padding: 25px 15px;">
             <h3 style="color: var(--gold); font-weight: 800; margin-bottom: 25px;"> Surprise 👀</h3>
             <div class="cards-container">
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-front">دوسي متخافيش..😂</div>
-                    <div class="card-back">ع فكره مش بحب اشوفك زعلانه!</div>
+                <div class="card-pulse-wrapper">
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="card-front">دوسي متخافيش..😂</div>
+                        <div class="card-back">ع فكره مش بحب اشوفك زعلانه!</div>
+                    </div>
                 </div>
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-front">فاكرة اول يوم اتقابلنا!..</div>
-                    <div class="card-back">24/6/24<br>كانت اول لحظه نشوف بعض فيها فاكراها!.. 😍</div>
+                <div class="card-pulse-wrapper">
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="card-front">فاكرة اول يوم اتقابلنا!..</div>
+                        <div class="card-back">24/6/24<br>كانت اول لحظه نشوف بعض فيها فاكراها!.. 😍</div>
+                    </div>
                 </div>
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-front">دوسي بقا🤨</div>
-                    <div class="card-back">بحبك ي غباء..😂</div>
+                <div class="card-pulse-wrapper">
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="card-front">دوسي بقا🤨</div>
+                        <div class="card-back">بحبك ي غباء..😂</div>
+                    </div>
                 </div>
-                <div class="flip-card" onclick="handleVoiceRecord('recVoice', this)">
-                    <div class="card-front">دوسي لو حابه تسمعي🙃</div>
-                    <div class="card-back" style="flex-direction: column;">
-                        <div class="pulse-heart">❤️</div>
-                        <p style="margin:0; font-size: 12px; color: var(--gold);">سيديهات دي👀😂</p>
-                        <audio id="recVoice"><source src="mk.mp3" type="audio/mpeg"></audio>
+                <div class="card-pulse-wrapper">
+                    <div class="flip-card" onclick="handleVoiceRecord('recVoice', this)">
+                        <div class="card-front">دوسي لو حابه تسمعي🙃</div>
+                        <div class="card-back" style="flex-direction: column;">
+                            <div class="pulse-heart">❤️</div>
+                            <p style="margin:0; font-size: 12px; color: var(--gold);">سيديهات دي👀😂</p>
+                            <audio id="recVoice"><source src="mk.mp3" type="audio/mpeg"></audio>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -411,3 +421,4 @@
     </script>
 </body>
 </html>
+
