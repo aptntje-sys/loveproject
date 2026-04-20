@@ -77,7 +77,6 @@
         .story-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         .story-date-tag { font-size: 11px; margin-top: 8px; color: var(--gold); font-weight: 700; opacity: 0.9; }
         
-        /* نافذة عرض الصورة المكبرة للاستوري */
         .story-viewer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 20000; display: none;
@@ -87,7 +86,6 @@
         .view-content { width: 90%; max-width: 400px; position: relative; }
         .view-content img { width: 100%; border-radius: 20px; border: 2px solid var(--gold); box-shadow: 0 0 30px var(--gold); }
         .close-view { position: absolute; top: -50px; right: 0; font-size: 30px; color: white; cursor: pointer; }
-        /* --------------------------- */
 
         .custom-msg-box {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
@@ -164,7 +162,7 @@
         .falling-flower { position: fixed; font-size: 28px; z-index: 999; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
         
-        button:not(.premium-btn) { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 30px; font-weight: 800; cursor: pointer; transition: 0.3s; margin: 10px 5px; }
+        button:not(.premium-btn):not(.royal-flower-btn) { background: var(--gold); color: #1a0101; border: none; padding: 12px 35px; border-radius: 30px; font-weight: 800; cursor: pointer; transition: 0.3s; margin: 10px 5px; }
 
         .fancy-trigger-btn {
             background: var(--violet-pink) !important;
@@ -182,6 +180,36 @@
             outline: none;
             animation: smooth-pulse 2.5s infinite ease-in-out;
         }
+
+        /* --- تصميم زرار الوردة الملكي الفخم --- */
+        .royal-flower-btn {
+            position: relative;
+            background: rgba(255, 182, 193, 0.15) !important;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 182, 193, 0.5) !important;
+            color: #fff !important;
+            padding: 18px 45px !important;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+            margin-top: 30px !important;
+            display: inline-block;
+            z-index: 1;
+            animation: royal-pulse 2s infinite ease-in-out;
+        }
+        .btn-content { display: flex; align-items: center; justify-content: center; gap: 12px; z-index: 2; position: relative; }
+        .flower-icon { font-size: 22px; animation: rotateFlower 4s infinite linear; }
+        @keyframes rotateFlower { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 105, 180, 0.4) 0%, transparent 70%); transform: translate(-50%, -50%) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
+        .royal-flower-btn:hover { transform: translateY(-5px) scale(1.05); border-color: #ffb6c1 !important; box-shadow: 0 15px 40px rgba(255, 182, 193, 0.5); }
+        .royal-flower-btn:hover .btn-glow { opacity: 1; animation: sweep 2s infinite linear; }
+        @keyframes sweep { 0% { transform: translate(-150%, -50%) rotate(45deg); } 100% { transform: translate(50%, -50%) rotate(45deg); } }
+        @keyframes royal-pulse { 0% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.3); } 50% { box-shadow: 0 0 35px rgba(255, 182, 193, 0.6); } 100% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.3); } }
     </style>
 </head>
 <body>
@@ -304,7 +332,15 @@
             <h4 style="margin:0; color:var(--gold); font-weight: 800;">باقي على الفرحة المنتظره ان شاء الله 🫣💍</h4>
             <div id="engagement-timer" style="font-size: 20px; margin-top:10px; font-weight:800;"></div>
         </div>
-        <button onclick="giveFlower()" style="background: var(--light-pink); color: #4a0404; margin-top: 20px;">خدي وردة يا وردة 🌸</button>
+        
+        <button class="royal-flower-btn" onclick="giveFlower()">
+            <span class="btn-content">
+                <span class="flower-icon">🌸</span>
+                خدي وردة يا وردة 
+                <span class="flower-icon">🌸</span>
+            </span>
+            <div class="btn-glow"></div>
+        </button>
     </section>
 
     <script>
@@ -460,7 +496,6 @@
             }
         }
 
-        /* دوال الاستوري */
         function openStory(img) {
             document.getElementById('viewImg').src = img;
             document.getElementById('storyViewer').classList.add('active');
