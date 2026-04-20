@@ -57,6 +57,34 @@
             100% { transform: scale(1) translateY(0); box-shadow: 0 0 15px rgba(255, 20, 147, 0.3); }
         }
 
+        /* استايل الاستوريهات الجديد */
+        .stories-wrapper { display: flex; justify-content: center; gap: 15px; margin: 20px 0 40px 0; padding: 0 10px; }
+        .story-circle {
+            width: 75px; height: 75px; border-radius: 50%; position: relative;
+            cursor: pointer; padding: 3px; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            animation: rotate-border 4s linear infinite;
+        }
+        @keyframes rotate-border { 100% { filter: hue-rotate(360deg); } }
+        .story-inner {
+            width: 100%; height: 100%; border-radius: 50%; background: #0f0101;
+            padding: 2px; overflow: hidden; position: relative; z-index: 2;
+        }
+        .story-inner img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .story-label { font-size: 11px; margin-top: 8px; font-weight: 800; color: var(--gold); }
+
+        /* مشغل الفيديو الـ Overlay */
+        .video-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 20000; display: none;
+            align-items: center; justify-content: center;
+        }
+        .video-container { width: 90%; max-width: 400px; position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 0 30px var(--gold); }
+        .video-container video { width: 100%; display: block; }
+        .close-video {
+            position: absolute; top: -50px; right: 0; color: white; font-size: 30px;
+            cursor: pointer; font-weight: bold; padding: 10px;
+        }
+
         .custom-msg-box {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
             background: rgba(15, 1, 1, 0.95); border: 1.5px solid var(--gold);
@@ -92,25 +120,16 @@
         .note-icon { font-size: 20px; animation: rotating 3s infinite linear; display: inline-block; }
         @keyframes rotating { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* الكروت: تم تثبيتها تماماً (إزالة النبض) لراحة العين وتناسق الصفحة */
         .cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-bottom: 30px; perspective: 1000px; }
-        .flip-card { 
-            width: 100%; height: 125px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
+        .flip-card { width: 100%; height: 125px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .flip-card.flipped { transform: rotateY(180deg); }
         .card-front, .card-back {
             position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
             border-radius: 20px; display: flex; align-items: center; justify-content: center;
             padding: 12px; border: 1.5px solid rgba(255, 255, 255, 0.5); text-align: center; overflow: hidden;
         }
-        .card-front { 
-            background: var(--violet-pink); backdrop-filter: blur(15px); color: white; font-size: 15px; font-weight: 800; 
-            box-shadow: 0 0 15px rgba(255, 20, 147, 0.3);
-        }
-        .card-back { 
-            background: rgba(0, 0, 0, 0.8); transform: rotateY(180deg); color: var(--gold); font-size: 13px; font-weight: 700; 
-            border: 1.5px solid var(--gold); line-height: 1.4; 
-        }
+        .card-front { background: var(--violet-pink); backdrop-filter: blur(15px); color: white; font-size: 15px; font-weight: 800; box-shadow: 0 0 15px rgba(255, 20, 147, 0.3); }
+        .card-back { background: rgba(0, 0, 0, 0.8); transform: rotateY(180deg); color: var(--gold); font-size: 13px; font-weight: 700; border: 1.5px solid var(--gold); line-height: 1.4; }
 
         @keyframes heartPulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
         .pulse-heart { font-size: 38px; animation: heartPulse 1.2s infinite; display: inline-block; cursor: pointer; margin-bottom: 5px; }
@@ -137,21 +156,13 @@
 
         .fancy-trigger-btn {
             background: var(--violet-pink) !important;
-            backdrop-filter: blur(15px);
-            color: #fff !important;
+            backdrop-filter: blur(15px); color: #fff !important;
             border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
-            padding: 15px 40px !important;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.4s;
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
-            margin: 20px 5px !important;
-            outline: none;
-            animation: smooth-pulse 2.5s infinite ease-in-out;
+            padding: 15px 40px !important; border-radius: 30px;
+            font-weight: 800; font-size: 16px; cursor: pointer;
+            transition: 0.4s; box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
+            margin: 20px 5px !important; outline: none; animation: smooth-pulse 2.5s infinite ease-in-out;
         }
-        .fancy-trigger-btn:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -160,6 +171,15 @@
     <div id="backBtn" onclick="goBack()">➜</div>
     <div id="mBtnFixed" class="music-control-fixed" onclick="toggleM()">🎵</div>
     <div id="kissBtn" class="kiss-float" onclick="giveKiss()">💋</div>
+
+    <div id="videoOverlay" class="video-overlay" onclick="closeVideo()">
+        <div class="video-container" onclick="event.stopPropagation()">
+            <span class="close-video" onclick="closeVideo()">×</span>
+            <video id="mainVideo" controls playsinline>
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
 
     <div id="footerPlayer" class="music-player-fixed" onclick="toggleM()">
         <span class="note-icon" id="fNote">🎵</span>
@@ -225,9 +245,28 @@
 
     <section id="p3" style="justify-content: flex-start; padding-top: 80px; padding-bottom: 100px;">
         <div class="envelope-capsule" onclick="openMagicLetter()">
-            <span style="font-size: 22px;"></span>
             <span style="font-size: 15px; font-weight: 800; color: #fff;">دوسي هنا🫵🏻</span>
         </div>
+
+        <div class="stories-wrapper">
+            <div onclick="openVideo('m1.mp4')">
+                <div class="story-circle"><div class="story-inner"><img src="m1"></div></div>
+                <div class="story-label">يومنا 💓</div>
+            </div>
+            <div onclick="openVideo('m2.mp4')">
+                <div class="story-circle"><div class="story-inner"><img src="m2"></div></div>
+                <div class="story-label">ضحكتك 💕</div>
+            </div>
+            <div onclick="openVideo('m3.mp4')">
+                <div class="story-circle"><div class="story-inner"><img src="m3"></div></div>
+                <div class="story-label">ذكرى 👀</div>
+            </div>
+            <div onclick="openVideo('m4.mp4')">
+                <div class="story-circle"><div class="story-inner"><img src="m4"></div></div>
+                <div class="story-label">انتي 👑</div>
+            </div>
+        </div>
+
         <h2 style="color: var(--gold); font-weight: 800; margin-bottom: 30px;">فيه احلى من كده👀</h2>
         <div class="photo-list">
             <div class="photo-item"><img src="m1"><p>أول مره اشوف القمر فيها💓</p></div>
@@ -361,19 +400,34 @@
             }
         }
 
+        function openVideo(src) {
+            const mainAudio = document.getElementById('audio');
+            const overlay = document.getElementById('videoOverlay');
+            const video = document.getElementById('mainVideo');
+            if (!mainAudio.paused) { mainAudio.pause(); mainAudio.wasPlaying = true; }
+            video.src = src;
+            overlay.style.display = 'flex';
+            video.play();
+        }
+
+        function closeVideo() {
+            const mainAudio = document.getElementById('audio');
+            const overlay = document.getElementById('videoOverlay');
+            const video = document.getElementById('mainVideo');
+            video.pause();
+            overlay.style.display = 'none';
+            if (mainAudio.wasPlaying) mainAudio.play();
+        }
+
         function handleVoiceRecord(id, card) {
             const mainAudio = document.getElementById('audio');
             const record = document.getElementById(id);
             card.classList.toggle('flipped');
             if (card.classList.contains('flipped')) {
-                if (!mainAudio.paused) {
-                    mainAudio.pause();
-                    mainAudio.wasPlaying = true;
-                }
+                if (!mainAudio.paused) { mainAudio.pause(); mainAudio.wasPlaying = true; }
                 record.play();
             } else {
-                record.pause();
-                record.currentTime = 0;
+                record.pause(); record.currentTime = 0;
                 if (mainAudio.wasPlaying) mainAudio.play();
             }
         }
