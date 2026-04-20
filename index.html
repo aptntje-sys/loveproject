@@ -17,23 +17,28 @@
         .bg-heart { position: absolute; color: #ffb6c1; opacity: 0.6; animation: floatUp 6s infinite linear; pointer-events: none; }
         @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
 
-        /* --- زر الدخول البريميوم (نسخة أصغر وأشيك) --- */
+        /* --- مربع الباسورد على شكل قلب --- */
+        input#pw {
+            width: 140px; height: 130px; 
+            background: rgba(197, 160, 89, 0.1);
+            border: 1.5px solid var(--gold);
+            color: white; text-align: center; font-size: 16px; outline: none;
+            clip-path: path('M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.06 3.06 6.06 12 14.195 8.94-8.135 12-10.135 12-14.195 0-8.165-10.011-8.967-12-3.568z');
+            transform: scale(5); /* تكبير المسار ليتناسب مع التصميم */
+            margin: 60px 0;
+            padding-top: 20px;
+            display: block; margin-left: auto; margin-right: auto;
+            transition: 0.3s;
+        }
+        /* لتنسيق المدخلات داخل القلب */
+        input#pw::placeholder { color: rgba(255,255,255,0.5); font-size: 10px; transform: translateY(-5px); }
+
         .premium-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(192, 192, 192, 0.5);
-            backdrop-filter: blur(12px);
-            color: #fff;
-            padding: 12px 30px; /* تقليل الحجم */
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: 0.4s;
-            box-shadow: 0 5px 20px rgba(255,255,255,0.05);
-            display: inline-block;
-            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(192, 192, 192, 0.5);
+            backdrop-filter: blur(12px); color: #fff; padding: 12px 30px; border-radius: 40px;
+            font-weight: 700; font-size: 15px; cursor: pointer; position: relative;
+            overflow: hidden; transition: 0.4s; box-shadow: 0 5px 20px rgba(255,255,255,0.05);
+            display: inline-block; margin-top: 15px;
         }
         .premium-btn::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
@@ -78,8 +83,6 @@
         .fade-in-text { opacity: 0; animation: fadeInSmooth 1.5s ease-out forwards; color: var(--gold); font-weight: 800; margin-bottom: 10px; }
         @keyframes fadeInSmooth { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 20px; border: 1.5px solid var(--gold); background: rgba(0,0,0,0.6); color: white; text-align: center; font-size: 18px; outline: none; }
-        
         .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 20px 0; position: relative; z-index: 1; }
         .time-card { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 20px; border-bottom: 3px solid var(--gold); }
         .time-card span { display: block; font-size: 24px; color: var(--gold); font-weight: 800; }
@@ -128,9 +131,11 @@
 
     <section id="p1" class="active">
         <div class="glass-box">
-            <div style="font-size: 50px; margin-bottom: 20px;">💞</div>
+            <div style="font-size: 50px; margin-bottom: 10px;">💞</div>
             <h2 class="fade-in-text">نورتي قلبي يا مزة😉</h2>
-            <input type="text" id="pw" placeholder="الباسورد بقا👀">
+            <div style="height: 140px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                 <input type="text" id="pw" placeholder="الباسورد">
+            </div>
             <div class="premium-btn" onclick="checkPw()">خشي برجلك اليمين 😂🤨</div>
         </div>
     </section>
@@ -326,4 +331,3 @@
     </script>
 </body>
 </html>
-
