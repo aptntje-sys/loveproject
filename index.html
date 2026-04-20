@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى ست البنات ❤️</title>
+    <title>ل ست البنات ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); --light-pink: #ffb6c1; --silver-glass: rgba(192, 192, 192, 0.15); }
@@ -98,7 +98,7 @@
     <div id="msgOverlay" class="msg-overlay" onclick="closeMagicLetter()"></div>
     <div id="msgBox" class="custom-msg-box" onclick="closeMagicLetter()">
         <p id="msgText" style="font-size: 20px; font-weight: bold; line-height: 1.6;"></p>
-        <div style="margin-top:15px; color:var(--gold); font-size:12px;">إلمسي الشاشة للإغلاق ✨</div>
+        <div style="margin-top:15px; color:var(--gold); font-size:12px;">إخفاء</div>
     </div>
 
     <audio id="audio" loop><source src="m.mp3" type="audio/mpeg"></audio>
@@ -125,7 +125,7 @@
             
             <div class="music-player-capsule" onclick="toggleM()">
                 <span class="note-icon" id="note">🎵</span>
-                <span id="pStatus" style="font-size: 14px; font-weight: bold; color: var(--gold);">تشغيل الأغنية الخاصة</span>
+                <span id="pStatus" style="font-size: 14px; font-weight: bold; color: var(--gold);">شغلي الاغنية🤨</span>
                 <div style="width:30px;height:30px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#4a0404;" id="pCircle">▶</div>
             </div>
 
@@ -135,7 +135,7 @@
 
     <section id="p3" style="justify-content: flex-start; padding-top: 80px;">
         <div class="envelope-capsule" onclick="openMagicLetter()">
-            <span style="font-size: 22px;">💌</span>
+            <span style="font-size: 22px;>!</span>
             <span style="font-size: 14px; font-weight: bold; color: #eee;">رسالة ليكي</span>
         </div>
 
@@ -271,7 +271,7 @@
 
         function giveKiss() {
             for(let i=0; i<15; i++) {
-                const k = document.createElement('div'); k.innerHTML = '❤️';
+                const k = document.createElement('div'); k.innerHTML = '💋';
                 k.style.position = 'fixed'; k.style.left = Math.random()*100+'vw'; k.style.bottom = '-50px';
                 k.style.fontSize = '30px'; k.style.zIndex = '10000'; k.style.transition = (Math.random()*2+1)+'s';
                 document.body.appendChild(k);
@@ -303,4 +303,3 @@
     </script>
 </body>
 </html>
-
