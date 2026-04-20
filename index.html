@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى ست البنات ❤️</title>
+    <title>ل ست البنات ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); --light-pink: #ffb6c1; --silver-glass: rgba(192, 192, 192, 0.15); }
@@ -17,23 +17,12 @@
         .bg-heart { position: absolute; color: #ffb6c1; opacity: 0.6; animation: floatUp 6s infinite linear; pointer-events: none; }
         @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
 
-        /* --- زر الدخول البريميوم (نسخة أصغر وأشيك) --- */
         .premium-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(192, 192, 192, 0.5);
-            backdrop-filter: blur(12px);
-            color: #fff;
-            padding: 12px 30px; /* تقليل الحجم */
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: 0.4s;
-            box-shadow: 0 5px 20px rgba(255,255,255,0.05);
-            display: inline-block;
-            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(192, 192, 192, 0.5);
+            backdrop-filter: blur(12px); color: #fff; padding: 12px 30px; border-radius: 40px;
+            font-weight: 700; font-size: 15px; cursor: pointer; position: relative;
+            overflow: hidden; transition: 0.4s; box-shadow: 0 5px 20px rgba(255,255,255,0.05);
+            display: inline-block; margin-top: 15px;
         }
         .premium-btn::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
@@ -101,9 +90,14 @@
         .cursor::after { content: '|'; animation: blink 1s infinite; color: var(--gold); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        #backBtn, .music-control-fixed { position: fixed; z-index: 100; background: var(--glass); border: 1px solid var(--gold); color: var(--gold); width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; }
+        #backBtn, .music-control-fixed { position: fixed; z-index: 100; background: var(--glass); border: 1px solid var(--gold); color: var(--gold); width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: 0.3s; }
         #backBtn { top: 20px; right: 20px; }
         .music-control-fixed { top: 20px; left: 20px; }
+
+        /* ستايل الشرطة المائلة لأيقونة الموسيقى */
+        .music-control-fixed.muted::after {
+            content: ''; position: absolute; width: 70%; height: 2px; background: var(--gold); transform: rotate(45deg); box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
 
         .falling-flower { position: fixed; font-size: 28px; z-index: 999; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
@@ -241,6 +235,8 @@
                 document.getElementById('mBtnFixed').style.display = 'flex';
                 document.getElementById('backBtn').style.display = 'flex';
                 document.getElementById('kissBtn').style.display = 'flex';
+                // تحديث شكل الزرار عند الدخول لأن الموسيقى بتشتغل تلقائي
+                document.getElementById('mBtnFixed').classList.remove('muted');
                 setInterval(updateTimers, 1000);
             } else { alert("الباسورد غلط يا دكتورة! 😉"); }
         }
@@ -320,8 +316,20 @@
             const a = document.getElementById('audio');
             const pStatus = document.getElementById('pStatus');
             const pCircle = document.getElementById('pCircle');
-            if (a.paused) { a.play(); pStatus.innerText = "الاغنية دي ليكي 💞"; pCircle.innerText = "🔊"; } 
-            else { a.pause(); pStatus.innerText = "شغلي الاغنية🤨"; pCircle.innerText = "🔈"; }
+            const mBtnFixed = document.getElementById('mBtnFixed');
+
+            if (a.paused) { 
+                a.play(); 
+                if(pStatus) pStatus.innerText = "الاغنية دي ليكي 💞"; 
+                if(pCircle) pCircle.innerText = "🔊"; 
+                mBtnFixed.classList.remove('muted');
+            } 
+            else { 
+                a.pause(); 
+                if(pStatus) pStatus.innerText = "شغلي الاغنية🤨"; 
+                if(pCircle) pCircle.innerText = "🔈"; 
+                mBtnFixed.classList.add('muted');
+            }
         }
     </script>
 </body>
