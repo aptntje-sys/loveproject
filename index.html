@@ -181,35 +181,102 @@
             animation: smooth-pulse 2.5s infinite ease-in-out;
         }
 
-        /* --- تصميم زرار الوردة الملكي الفخم --- */
+        /* --- تصميم زرار الوردة الملكي الفخم - تم التعديل لتصغير الحجم وزيادة التوهج --- */
         .royal-flower-btn {
             position: relative;
             background: rgba(255, 182, 193, 0.15) !important;
             backdrop-filter: blur(15px);
             border: 2px solid rgba(255, 182, 193, 0.5) !important;
             color: #fff !important;
-            padding: 18px 45px !important;
+            /* تم تصغير الـ padding والخط حاجة بسيطة */
+            padding: 12px 35px !important;
             border-radius: 50px;
             font-weight: 800;
-            font-size: 18px;
+            font-size: 16px;
             letter-spacing: 1px;
             cursor: pointer;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+            /* زيادة التوهج الافتراضي */
+            box-shadow: 0 5px 25px rgba(255, 182, 193, 0.4);
             margin-top: 30px !important;
             display: inline-block;
             z-index: 1;
-            animation: royal-pulse 2s infinite ease-in-out;
+            /* تم زيادة قوة التوهج في الأنيميشن */
+            animation: royal-pulse-intense 2s infinite ease-in-out;
         }
-        .btn-content { display: flex; align-items: center; justify-content: center; gap: 12px; z-index: 2; position: relative; }
-        .flower-icon { font-size: 22px; animation: rotateFlower 4s infinite linear; }
+        .btn-content { display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 2; position: relative; }
+        .flower-icon { font-size: 18px; animation: rotateFlower 4s infinite linear; }
         @keyframes rotateFlower { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 105, 180, 0.4) 0%, transparent 70%); transform: translate(-50%, -50%) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
-        .royal-flower-btn:hover { transform: translateY(-5px) scale(1.05); border-color: #ffb6c1 !important; box-shadow: 0 15px 40px rgba(255, 182, 193, 0.5); }
+        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, transparent 70%); transform: translate(-50%, -50%) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
+        .royal-flower-btn:hover { transform: translateY(-3px) scale(1.03); border-color: #ffb6c1 !important; box-shadow: 0 10px 35px rgba(255, 182, 193, 0.7); }
         .royal-flower-btn:hover .btn-glow { opacity: 1; animation: sweep 2s infinite linear; }
         @keyframes sweep { 0% { transform: translate(-150%, -50%) rotate(45deg); } 100% { transform: translate(50%, -50%) rotate(45deg); } }
-        @keyframes royal-pulse { 0% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.3); } 50% { box-shadow: 0 0 35px rgba(255, 182, 193, 0.6); } 100% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.3); } }
+        /* أنيميشن نبض أكثر توهجاً */
+        @keyframes royal-pulse-intense { 0% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.4); } 50% { box-shadow: 0 0 40px rgba(255, 182, 193, 0.8); } 100% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.4); } }
+
+        /* --- استايل فقاعة شات الواتس البريميوم للعداد --- */
+        .whatsapp-bubble-container {
+            position: relative;
+            margin-top: 25px;
+            /* إزاحة خفيفة جهة اليمين */
+            padding-right: 15px;
+            display: flex;
+            justify-content: flex-start; /* ليكون السهم جهة اليسار */
+            width: 100%;
+        }
+
+        .whatsapp-bubble {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            /* تدوير الزاوية جهة اليسار السفلية لتبدو كفقاعة مستلمة */
+            border-bottom-right-radius: 5px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 90%;
+            text-align: right;
+            animation: bubbleFadeIn 0.5s ease-out;
+        }
+
+        /* مثلث فقاعة الشات (السهم) */
+        .whatsapp-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: -10px; /* مكان السهم جهة اليمين */
+            width: 0;
+            height: 0;
+            border-style: solid;
+            /* شكل السهم */
+            border-width: 15px 0 0 15px;
+            border-color: transparent transparent transparent rgba(255, 255, 255, 0.08);
+            /* ليتناسب مع الـ backdrop-filter نستخدم طريقة بديلة للسهم الزجاجي */
+            filter: blur(0.5px);
+            transform: translateY(1px);
+        }
+        
+        /* طبقة إضافية لتأثير الزجاج على السهم */
+        .whatsapp-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 1px;
+            right: -8px;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+            z-index: -1;
+        }
+
+        @keyframes bubbleFadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
     </style>
 </head>
 <body>
@@ -328,9 +395,12 @@
         <div class="glass-box" style="border: 2px dashed var(--gold); min-height: 250px;">
             <div id="typewriter" class="cursor"></div>
         </div>
-        <div class="glass-box" style="margin-top:20px; padding:20px;">
-            <h4 style="margin:0; color:var(--gold); font-weight: 800;">باقي على الفرحة المنتظره ان شاء الله 🫣💍</h4>
-            <div id="engagement-timer" style="font-size: 20px; margin-top:10px; font-weight:800;"></div>
+        
+        <div class="whatsapp-bubble-container">
+            <div class="whatsapp-bubble">
+                <h4 style="margin:0 0 10px 0; color:var(--gold); font-weight: 800; font-size: 14px;">باقي على الفرحة المنتظره ان شاء الله 🫣💍</h4>
+                <div id="engagement-timer" style="font-size: 18px; font-weight:800; color: #fff;"></div>
+            </div>
         </div>
         
         <button class="royal-flower-btn" onclick="giveFlower()">
