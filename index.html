@@ -95,6 +95,10 @@
         .card-front { background: var(--violet-pink); backdrop-filter: blur(5px); color: white; font-size: 30px; box-shadow: 0 0 15px rgba(255, 105, 180, 0.3); }
         .card-back { background: rgba(255, 255, 255, 0.1); transform: rotateY(180deg); color: var(--gold); font-size: 14px; font-weight: bold; border: 1px solid var(--gold); }
 
+        /* تأثير نبض القلب */
+        @keyframes heartPulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        .pulse-heart { font-size: 45px; animation: heartPulse 1.2s infinite; display: inline-block; cursor: pointer; }
+
         .love-divider { font-family: 'Dancing Script', cursive; font-size: 45px; color: #ff69b4; margin: 25px 0; text-shadow: 0 0 10px rgba(255, 105, 180, 0.8); }
 
         .photo-list { width: 100%; max-width: 450px; }
@@ -181,9 +185,10 @@
                     <div class="card-back">ست البنات وكل البنات في نظري 🫂</div>
                 </div>
                 <div class="flip-card" onclick="handleVoiceRecord('recVoice', this)">
-                    <div class="card-front">💎</div>
+                    <div class="card-front">💖</div>
                     <div class="card-back">
-                        <span style="font-size: 14px;">اسمعي دي.. 😉</span>
+                        <div class="pulse-heart">❤️</div>
+                        <p style="font-size: 11px; margin-top: 5px; color: var(--gold);">اسمعي دقات قلبي.. 😉</p>
                         <audio id="recVoice"><source src="mk.mp3" type="audio/mpeg"></audio>
                     </div>
                 </div>
@@ -344,7 +349,6 @@
             }
         }
 
-        // دالة الريكورد للمربع الرابع
         function handleVoiceRecord(id, card) {
             const mainAudio = document.getElementById('audio');
             const record = document.getElementById(id);
@@ -394,3 +398,4 @@
     </script>
 </body>
 </html>
+
