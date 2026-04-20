@@ -17,7 +17,7 @@
         .bg-heart { position: absolute; color: #ffb6c1; opacity: 0.6; animation: floatUp 6s infinite linear; pointer-events: none; }
         @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
 
-        /* --- إضافات بريميوم جديدة --- */
+        /* --- إضافات بريميوم --- */
         .kiss-float {
             position: fixed; bottom: 30px; left: 20px; width: 60px; height: 60px;
             background: var(--silver-glass); border: 1px solid rgba(192, 192, 192, 0.4);
@@ -35,7 +35,6 @@
             gap: 10px; margin: 0 auto 20px auto; cursor: pointer; transition: 0.3s;
         }
 
-        /* ستايل صندوق الرسايل المخصص (الجديد) */
         .custom-msg-box {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
             background: rgba(15, 1, 1, 0.95); border: 1.5px solid var(--gold);
@@ -135,8 +134,8 @@
 
     <section id="p3" style="justify-content: flex-start; padding-top: 80px;">
         <div class="envelope-capsule" onclick="openMagicLetter()">
-            <span style="font-size: 22px;>!</span>
-            <span style="font-size: 14px; font-weight: bold; color: #eee;">رسالة ليكي</span>
+            <span style="font-size: 22px;">!</span>
+            <span style="font-size: 14px; font-weight: bold; color: #eee;">رسالة ليكي👀</span>
         </div>
 
         <h2 style="color: var(--gold); font-weight: 800; margin-bottom: 30px;">لحظاتنا الحلوة👀</h2>
@@ -166,10 +165,28 @@
         const bg = document.getElementById('bg');
         let currentStep = 1;
 
+        // قائمة الرسائل المحدثة بمحتوى أكثر وأجمل
         const randomQuotes = [
-            "أنتي أجمل حاجة حصلتلي 💓", "ضحكتك بتنور دنيتي والله 👀", "يا وش السعد عليا يا قمر 🌙", 
-            "كل يوم بحبك أكتر من اللي قبله 💍", "أنتي ست البنات وكل البنات 👑", "ربنا يخليكي ليا وميحرمنيش منك 🫂",
-            "نصيبي الحلو من الدنيا أنتي 🌍", "ضحكتك هي اللي بتهون التعب 😂", "أنتي السند والكتف اللي برمي عليه تعبي ❤️", "يا أحلى دكتورة في الكوكب 😉"
+            "أنتي أجمل حاجة حصلتلي في حياتي كلها 💓",
+            "ضحكتك بتنور دنيتي وبتخليني أنسى أي تعب 👀",
+            "يا وش السعد عليا يا أحلى قمر شافته عيني 🌙",
+            "كل يوم بيمر علينا بحبك فيه أكتر من اللي قبله 💍",
+            "أنتي ست البنات وكل البنات في نظري 👑",
+            "ربنا يخليكي ليا وما يحرمنيش من وجودك جنبي أبداً 🫂",
+            "نصيبي الحلو من الدنيا دي كلها هو أنتي 🌍",
+            "ضحكتك هي اللي بتهون عليا كل حاجة صعبة 😂",
+            "أنتي السند والكتف اللي برمي عليه تعبي وبطمن ❤️",
+            "يا أحلى وأشطر دكتورة في الكوكب كله 😉",
+            "وجودك في حياتي مخليني أسعد إنسان في الدنيا 💖",
+            "أنا بجد محظوظ بيكي يا ست البنات 🙈",
+            "عيونك فيها حياة تانية أنا بعشق تفاصيلها 👀✨",
+            "كل لحظة معاكي هي ذكرى حلوة محفورة في قلبي 💕",
+            "أنتي مش بس حبيبتي، أنتي بنتي وصاحبتي وكل مالي 🌸",
+            "نفسي أفضل طول العمر شايف الضحكة دي على وشك 😍",
+            "انتي رزق كبير من ربنا بشكره عليه كل يوم 🤲❤",
+            "يا أغلى من روحي، مكانك في قلبي محدش هياخده أبداً 🔒❤️",
+            "مهما قولت كلام مش هيكفي يوصف حبي ليكي يا مزتي 🫣",
+            "أنتي الوحيدة اللي بتعرفي تخليني أضحك من قلبي بجد 💓"
         ];
 
         function createElements() {
@@ -280,7 +297,6 @@
             }
         }
 
-        /* وظائف الرسائل العشوائية الجديدة (بدل الـ alert) */
         function openMagicLetter() {
             const randomMsg = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
             document.getElementById('msgText').innerText = randomMsg;
