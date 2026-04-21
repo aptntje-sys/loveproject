@@ -13,7 +13,6 @@
             --light-pink: #ffb6c1; 
             --silver-glass: rgba(224, 224, 224, 0.2); 
             --violet-pink: linear-gradient(135deg, rgba(255, 105, 180, 0.4), rgba(199, 21, 133, 0.4)); 
-            /* تدرج الذهب الملكي الجديد */
             --royal-gold: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --gold-text: #fcf6ba;
         }
@@ -85,7 +84,6 @@
         }
         .story-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         
-        /* تعديل تواريخ الاستوريز للذهب */
         .story-date-tag { 
             font-size: 11px; margin-top: 8px; font-weight: 700;
             background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -117,11 +115,18 @@
 
         .glass-box { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 35px 20px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); position: relative; }
         
-        /* تعديل إطار مربع الكلام في الصفحة الرابعة للذهب */
+        /* التعديل المطلوب: غلاف بيضاوي متقطع جذاب بالذهب */
         .gold-border-box {
-            border: 2px solid #b38728 !important;
-            border-image: var(--royal-gold) 1 !important;
-            box-shadow: 0 0 20px rgba(186, 148, 62, 0.4) !important;
+            border: 3px dashed #bf953f !important;
+            border-radius: 50px !important; /* جعل الزوايا بيضاوية أكثر */
+            background: linear-gradient(rgba(15, 1, 1, 0.8), rgba(15, 1, 1, 0.8)), var(--glass);
+            box-shadow: 0 0 25px rgba(191, 149, 63, 0.3), inset 0 0 15px rgba(252, 246, 186, 0.1) !important;
+            animation: border-dance 4s infinite linear;
+        }
+        @keyframes border-dance {
+            0% { border-style: dashed; }
+            50% { border-color: #fcf6ba; }
+            100% { border-color: #bf953f; }
         }
 
         .fade-in-text { opacity: 0; animation: fadeInSmooth 1.5s ease-out forwards; color: var(--pink-glow); font-weight: 800; margin-bottom: 10px; }
@@ -133,7 +138,6 @@
         .time-card { background: rgba(255, 133, 162, 0.1); padding: 15px; border-radius: 20px; border-bottom: 3px solid var(--pink-glow); border-left: 1px solid rgba(255,255,255,0.1); }
         .time-card span { display: block; font-size: 24px; color: var(--pink-glow); font-weight: 800; }
 
-        /* تعديل "حكايتنا بدأت من" للذهب */
         .gold-title {
             background: var(--royal-gold);
             -webkit-background-clip: text;
@@ -142,7 +146,6 @@
             filter: drop-shadow(0 0 5px rgba(186, 148, 62, 0.5));
         }
 
-        /* تعديل تاريخ 14-4-2023 للذهب */
         .gold-badge {
             background: var(--royal-gold) !important;
             color: #2a0216 !important;
@@ -219,11 +222,6 @@
             outline: none;
             animation: smooth-pulse-silver 2.5s infinite ease-in-out;
         }
-        @keyframes smooth-pulse-silver {
-            0% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
-            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,255,255,0.3); }
-            100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
-        }
 
         .royal-flower-btn {
             position: relative;
@@ -250,9 +248,6 @@
         @keyframes rotateFlower { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 133, 162, 0.6) 0%, transparent 70%); transform: translate(-50%, -50%) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
         .royal-flower-btn:hover { transform: translateY(-3px) scale(1.03); border-color: #fff !important; box-shadow: 0 10px 35px rgba(255, 255, 255, 0.3); }
-        .royal-flower-btn:hover .btn-glow { opacity: 1; animation: sweep 2s infinite linear; }
-        @keyframes sweep { 0% { transform: translate(-150%, -50%) rotate(45deg); } 100% { transform: translate(50%, -50%) rotate(45deg); } }
-        @keyframes royal-pulse-intense { 0% { box-shadow: 0 0 15px rgba(255, 133, 162, 0.4); } 50% { box-shadow: 0 0 40px rgba(255, 133, 162, 0.8); } 100% { box-shadow: 0 0 15px rgba(255, 133, 162, 0.4); } }
 
         .whatsapp-bubble-container {
             position: relative;
@@ -274,39 +269,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             max-width: 90%;
             text-align: right;
-            animation: bubbleFadeIn 0.5s ease-out;
         }
-
-        .whatsapp-bubble::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: -10px;
-            width: 0; height: 0;
-            border-style: solid;
-            border-width: 15px 0 0 15px;
-            border-color: transparent transparent transparent rgba(255, 255, 255, 0.1);
-            filter: blur(0.5px);
-            transform: translateY(1px);
-        }
-        
-        .whatsapp-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: 1px;
-            right: -8px;
-            width: 12px; height: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            clip-path: polygon(0 0, 100% 100%, 0 100%);
-            z-index: -1;
-        }
-
-        @keyframes bubbleFadeIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
     </style>
 </head>
 <body>
