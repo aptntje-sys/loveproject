@@ -7,12 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --main: #2a0216; /* لون خلفية أعمق مائل للبنفسجي */
-            --pink-glow: #ff85a2; /* الوردي المبهج بديل الذهبي */
+            --main: #2a0216; 
+            --pink-glow: #ff85a2; 
             --glass: rgba(255, 255, 255, 0.1); 
             --light-pink: #ffb6c1; 
-            --silver-glass: rgba(224, 224, 224, 0.2); /* الفضي الشفاف الفخم */
+            --silver-glass: rgba(224, 224, 224, 0.2); 
             --violet-pink: linear-gradient(135deg, rgba(255, 105, 180, 0.4), rgba(199, 21, 133, 0.4)); 
+            /* تدرج الذهب الملكي الجديد */
+            --royal-gold: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --gold-text: #fcf6ba;
         }
         * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
         body { margin: 0; background: #0f0101; color: white; overflow-x: hidden; text-align: center; }
@@ -24,7 +27,6 @@
         .bg-heart { position: absolute; color: var(--light-pink); opacity: 0.6; animation: floatUp 6s infinite linear; pointer-events: none; }
         @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
 
-        /* تعديل الزرار ليصبح فضي بريميوم */
         .premium-btn {
             background: var(--silver-glass); border: 1.5px solid rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(15px); color: #fff; padding: 12px 30px; border-radius: 40px;
@@ -82,7 +84,13 @@
             background: #0f0101; padding: 2px; overflow: hidden;
         }
         .story-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        .story-date-tag { font-size: 11px; margin-top: 8px; color: var(--pink-glow); font-weight: 700; opacity: 0.9; }
+        
+        /* تعديل تواريخ الاستوريز للذهب */
+        .story-date-tag { 
+            font-size: 11px; margin-top: 8px; font-weight: 700;
+            background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 2px rgba(186, 148, 62, 0.6));
+        }
         
         .story-viewer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -109,6 +117,13 @@
 
         .glass-box { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 35px 20px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); position: relative; }
         
+        /* تعديل إطار مربع الكلام في الصفحة الرابعة للذهب */
+        .gold-border-box {
+            border: 2px solid #b38728 !important;
+            border-image: var(--royal-gold) 1 !important;
+            box-shadow: 0 0 20px rgba(186, 148, 62, 0.4) !important;
+        }
+
         .fade-in-text { opacity: 0; animation: fadeInSmooth 1.5s ease-out forwards; color: var(--pink-glow); font-weight: 800; margin-bottom: 10px; }
         @keyframes fadeInSmooth { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -117,6 +132,23 @@
         .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 20px 0; position: relative; z-index: 1; }
         .time-card { background: rgba(255, 133, 162, 0.1); padding: 15px; border-radius: 20px; border-bottom: 3px solid var(--pink-glow); border-left: 1px solid rgba(255,255,255,0.1); }
         .time-card span { display: block; font-size: 24px; color: var(--pink-glow); font-weight: 800; }
+
+        /* تعديل "حكايتنا بدأت من" للذهب */
+        .gold-title {
+            background: var(--royal-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            filter: drop-shadow(0 0 5px rgba(186, 148, 62, 0.5));
+        }
+
+        /* تعديل تاريخ 14-4-2023 للذهب */
+        .gold-badge {
+            background: var(--royal-gold) !important;
+            color: #2a0216 !important;
+            padding: 5px 20px; border-radius: 20px; font-weight: 800; display: inline-block; margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(186, 148, 62, 0.6);
+        }
 
         .music-player-fixed {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -193,7 +225,6 @@
             100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
         }
 
-        /* --- زر الوردة الملكي الفضي/الوردي الجديد --- */
         .royal-flower-btn {
             position: relative;
             background: rgba(255, 255, 255, 0.1) !important;
@@ -223,7 +254,6 @@
         @keyframes sweep { 0% { transform: translate(-150%, -50%) rotate(45deg); } 100% { transform: translate(50%, -50%) rotate(45deg); } }
         @keyframes royal-pulse-intense { 0% { box-shadow: 0 0 15px rgba(255, 133, 162, 0.4); } 50% { box-shadow: 0 0 40px rgba(255, 133, 162, 0.8); } 100% { box-shadow: 0 0 15px rgba(255, 133, 162, 0.4); } }
 
-        /* --- فقاعة شات الواتس الوردي الزجاجي --- */
         .whatsapp-bubble-container {
             position: relative;
             margin-top: 25px;
@@ -342,14 +372,14 @@
                 </div>
             </div>
             <div class="love-divider">Love</div>
-            <h3 style="color: var(--pink-glow); font-weight: 800;">حكايتنا بدأت من..</h3>
+            <h3 class="gold-title">حكايتنا بدأت من..</h3>
             <div class="timer-grid">
                 <div class="time-card"><span id="dd">0</span><label>يوم</label></div>
                 <div class="time-card"><span id="hh">0</span><label>ساعة</label></div>
                 <div class="time-card"><span id="mm">0</span><label>دقيقة</label></div>
                 <div class="time-card"><span id="ss">0</span><label>ثانية</label></div>
             </div>
-            <div style="background: var(--pink-glow); color: #000; padding: 5px 20px; border-radius: 20px; font-weight: 800; display: inline-block; margin-bottom: 20px;">14-04-2023</div>
+            <div class="gold-badge">14-04-2023</div>
             <br>
             <button class="fancy-trigger-btn" onclick="showPage('p3')">لحظات عشناها سوا..🫵🏻</button>
         </div>
@@ -379,7 +409,7 @@
             </div>
         </div>
 
-        <h2 style="color: var(--pink-glow); font-weight: 800; margin-bottom: 30px;">فيه احلى من كده👀</h2>
+        <h2 class="gold-title" style="margin-bottom: 30px;">فيه احلى من كده👀</h2>
         <div class="photo-list">
             <div class="photo-item"><img src="m1"><p>أول مره اشوف القمر فيها💓</p></div>
             <div class="photo-item"><img src="m2"><p>البدايات اللي منسيتهاش 💕</p></div>
@@ -392,7 +422,7 @@
 
     <section id="p4" style="padding-bottom: 120px;">
         <h2 style="color: var(--pink-glow); font-weight: 800; margin-bottom: 20px;">الكلام ده ليكي بقا👀</h2>
-        <div class="glass-box" style="border: 2px dashed var(--pink-glow); min-height: 250px;">
+        <div class="glass-box gold-border-box" style="min-height: 250px;">
             <div id="typewriter" class="cursor"></div>
         </div>
         
