@@ -115,10 +115,9 @@
 
         .glass-box { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 35px 20px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); position: relative; }
         
-        /* التعديل المطلوب: غلاف بيضاوي متقطع جذاب بالذهب */
         .gold-border-box {
             border: 3px dashed #bf953f !important;
-            border-radius: 50px !important; /* جعل الزوايا بيضاوية أكثر */
+            border-radius: 50px !important;
             background: linear-gradient(rgba(15, 1, 1, 0.8), rgba(15, 1, 1, 0.8)), var(--glass);
             box-shadow: 0 0 25px rgba(191, 149, 63, 0.3), inset 0 0 15px rgba(252, 246, 186, 0.1) !important;
             animation: border-dance 4s infinite linear;
@@ -223,31 +222,54 @@
             animation: smooth-pulse-silver 2.5s infinite ease-in-out;
         }
 
+        /* --- التعديل المطلوب لزر الوردة --- */
         .royal-flower-btn {
             position: relative;
-            background: rgba(255, 255, 255, 0.1) !important;
+            background: linear-gradient(135deg, rgba(255, 133, 162, 0.2), rgba(255, 20, 147, 0.2)) !important;
             backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 182, 193, 0.6) !important;
+            border: 2px solid var(--pink-glow) !important;
             color: #fff !important;
-            padding: 12px 35px !important;
+            padding: 14px 38px !important;
             border-radius: 50px;
             font-weight: 800;
-            font-size: 16px;
-            letter-spacing: 1px;
+            font-size: 17px;
+            letter-spacing: 0.5px;
             cursor: pointer;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 5px 25px rgba(255, 133, 162, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 20px rgba(255, 133, 162, 0.5), inset 0 0 10px rgba(255, 133, 162, 0.2);
             margin-top: 30px !important;
             display: inline-block;
             z-index: 1;
-            animation: royal-pulse-intense 2s infinite ease-in-out;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        .btn-content { display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 2; position: relative; }
-        .flower-icon { font-size: 18px; animation: rotateFlower 4s infinite linear; }
+
+        /* منع تغير اللون عند الضغط (Active) وجعله يلمع أكثر */
+        .royal-flower-btn:active, .royal-flower-btn:focus {
+            background: linear-gradient(135deg, rgba(255, 133, 162, 0.3), rgba(255, 20, 147, 0.3)) !important;
+            border-color: var(--pink-glow) !important;
+            transform: scale(0.95);
+            box-shadow: 0 0 35px rgba(255, 133, 162, 0.8) !important;
+        }
+
+        .royal-flower-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 133, 162, 0.7);
+        }
+
+        .btn-content { display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 2; position: relative; text-shadow: 0 0 8px rgba(0,0,0,0.3); }
+        .flower-icon { font-size: 20px; animation: rotateFlower 4s infinite linear; }
         @keyframes rotateFlower { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 133, 162, 0.6) 0%, transparent 70%); transform: translate(-50%, -50%) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
-        .royal-flower-btn:hover { transform: translateY(-3px) scale(1.03); border-color: #fff !important; box-shadow: 0 10px 35px rgba(255, 255, 255, 0.3); }
+        
+        .btn-glow { 
+            position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; 
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%); 
+            transform: translate(-50%, -50%); transition: 0.5s; opacity: 0.5; z-index: -1;
+            animation: btn-shimmer 3s infinite;
+        }
+        @keyframes btn-shimmer { 0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); } }
+        /* ---------------------------------- */
 
         .whatsapp-bubble-container {
             position: relative;
