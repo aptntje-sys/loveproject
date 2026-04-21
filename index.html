@@ -7,69 +7,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --main: #2d0a1a; 
+            --main: #1a050d; 
             --pink: #ff8fab; 
             --light-pink: #ffb7c5; 
-            --silver: #e2e2e2; 
-            --gold: #d4af37; /* لون ذهبي لكسر الحدة */
-            --deep-purple: #4a1e36; /* بنفسجي عميق للخلفيات */
-            --glass: rgba(255, 255, 255, 0.08); 
-            --silver-glass: rgba(226, 226, 226, 0.15); 
-            --pink-gradient: linear-gradient(135deg, #ff8fab 0%, #fb6f92 50%, #ffb7c5 100%); 
-            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f1d592 50%, #b8860b 100%);
+            --silver: #f8f9fa; 
+            --deep-purple: #2d0a1a; 
+            --glass: rgba(255, 255, 255, 0.05); 
+            --pink-gradient: linear-gradient(135deg, #fb6f92 0%, #ff8fab 100%); 
+            --btn-gradient: linear-gradient(135deg, #ffffff 0%, #e2e2e2 100%); /* أزرار مميزة */
         }
         * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-        body { margin: 0; background: #1a050d; color: white; overflow-x: hidden; text-align: center; }
+        body { margin: 0; background: var(--main); color: white; overflow-x: hidden; text-align: center; }
         
         .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .star { position: absolute; background: var(--silver); border-radius: 50%; opacity: 0.3; animation: twinkle var(--d) infinite; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--d) infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
         
         .bg-heart { position: absolute; color: var(--light-pink); opacity: 0.6; animation: floatUp 6s infinite linear; pointer-events: none; }
         @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
 
-        /* تعديل زر الصفحة الأولى */
-        #p1 .premium-btn { background: var(--pink-gradient); border: none; color: #fff; }
-
         .premium-btn {
-            background: rgba(255, 143, 171, 0.1); border: 1px solid var(--silver);
-            backdrop-filter: blur(12px); color: #fff; padding: 12px 30px; border-radius: 40px;
-            font-weight: 700; font-size: 15px; cursor: pointer; position: relative;
-            overflow: hidden; transition: 0.4s; box-shadow: 0 5px 20px rgba(255, 143, 171, 0.1);
+            background: var(--btn-gradient); border: none;
+            color: #1a050d; padding: 12px 30px; border-radius: 40px;
+            font-weight: 800; font-size: 15px; cursor: pointer; position: relative;
+            overflow: hidden; transition: 0.4s; box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
             display: inline-block; margin-top: 15px;
         }
-        .premium-btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s; transform: skewX(-25deg);
-        }
-        .premium-btn:hover::before { left: 150%; }
-        .premium-btn:hover { background: var(--pink); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 143, 171, 0.3); }
+        .premium-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2); opacity: 0.9; }
 
         .kiss-float {
             position: fixed; bottom: 30px; left: 20px; width: 60px; height: 60px;
-            background: var(--silver-glass); border: 1px solid rgba(226, 226, 226, 0.4);
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px); border-radius: 50%; display: none;
             align-items: center; justify-content: center; font-size: 28px;
-            z-index: 9999; cursor: pointer; box-shadow: 0 0 20px rgba(226, 226, 226, 0.2);
-            transition: 0.4s; animation: pulse-silver 2s infinite;
+            z-index: 9999; cursor: pointer; animation: pulse-silver 2s infinite;
         }
-        @keyframes pulse-silver { 0% { box-shadow: 0 0 0 0 rgba(226, 226, 226, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(226, 226, 226, 0); } 100% { box-shadow: 0 0 0 0 rgba(226, 226, 226, 0); } }
+        @keyframes pulse-silver { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); } 70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
 
         .envelope-capsule {
             width: 170px; height: 55px; 
-            background: var(--gold-gradient); /* لون ذهبي مختلف */
-            border: 1.5px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(15px);
+            background: var(--btn-gradient); 
+            border: 1px solid white; backdrop-filter: blur(15px);
             border-radius: 40px; display: flex; align-items: center; justify-content: center;
             gap: 12px; margin: 0 auto 30px auto; cursor: pointer; transition: 0.3s;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
             animation: smooth-pulse 2.5s infinite ease-in-out;
         }
-
         @keyframes smooth-pulse {
-            0% { transform: scale(1) translateY(0); }
-            50% { transform: scale(1.08) translateY(-5px); }
-            100% { transform: scale(1) translateY(0); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .stories-container {
@@ -80,15 +66,12 @@
         .story-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
         .story-ring {
             width: 75px; height: 75px; border-radius: 50%;
-            padding: 3px; background: linear-gradient(45deg, #d4af37, #ff8fab, #ffffff);
-            position: relative; transition: 0.3s; box-shadow: 0 0 15px rgba(251, 111, 146, 0.4);
+            padding: 3px; background: linear-gradient(45deg, #fb6f92, #ffffff, #ffb7c5);
+            transition: 0.3s;
         }
-        .story-img-box {
-            width: 100%; height: 100%; border-radius: 50%;
-            background: #1a050d; padding: 2px; overflow: hidden;
-        }
+        .story-img-box { width: 100%; height: 100%; border-radius: 50%; background: #1a050d; padding: 2px; overflow: hidden; }
         .story-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        .story-date-tag { font-size: 11px; margin-top: 8px; color: var(--light-pink); font-weight: 700; opacity: 0.9; }
+        .story-date-tag { font-size: 11px; margin-top: 8px; color: var(--light-pink); font-weight: 700; }
         
         .story-viewer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -97,15 +80,14 @@
         }
         .story-viewer.active { display: flex; animation: fadeIn 0.3s; }
         .view-content { width: 90%; max-width: 400px; position: relative; }
-        .view-content img { width: 100%; border-radius: 20px; border: 2px solid var(--pink); box-shadow: 0 0 30px var(--pink); }
+        .view-content img { width: 100%; border-radius: 20px; border: 2px solid var(--pink); }
         .close-view { position: absolute; top: -50px; right: 0; font-size: 30px; color: white; cursor: pointer; }
 
         .custom-msg-box {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
-            background: rgba(45, 10, 26, 0.98); border: 1.5px solid var(--gold);
+            background: rgba(45, 10, 26, 0.98); border: 1px solid var(--pink);
             backdrop-filter: blur(15px); padding: 30px 20px; border-radius: 30px;
             z-index: 10002; width: 85%; max-width: 350px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
         .custom-msg-box.show { transform: translate(-50%, -50%) scale(1); }
         .msg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; z-index: 10001; }
@@ -113,30 +95,24 @@
         section { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 2; }
         .active { display: flex; }
 
-        /* تغيير خلفيات البوكسات لكسر الحدة */
-        #p2 .glass-box { background: rgba(74, 30, 54, 0.4); border-color: rgba(255, 143, 171, 0.3); }
-        #p3 .glass-box { background: rgba(26, 5, 13, 0.6); }
-
-        .glass-box { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 35px 20px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); position: relative; }
+        .glass-box { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 35px 20px; width: 95%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
         
         .fade-in-text { opacity: 0; animation: fadeInSmooth 1.5s ease-out forwards; color: var(--pink); font-weight: 800; margin-bottom: 10px; }
         @keyframes fadeInSmooth { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 20px; border: 1.5px solid var(--pink); background: rgba(0,0,0,0.6); color: white; text-align: center; font-size: 18px; outline: none; }
+        input { width: 90%; padding: 15px; margin: 20px 0; border-radius: 20px; border: 1px solid var(--pink); background: rgba(0,0,0,0.4); color: white; text-align: center; font-size: 18px; outline: none; }
         
-        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 20px 0; position: relative; z-index: 1; }
-        .time-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 20px; border-bottom: 3px solid var(--gold); }
-        .time-card span { display: block; font-size: 24px; color: var(--gold); font-weight: 800; }
+        .timer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 20px 0; }
+        .time-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 20px; border-bottom: 2px solid var(--pink); }
+        .time-card span { display: block; font-size: 24px; color: var(--pink); font-weight: 800; }
 
         .music-player-fixed {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: linear-gradient(45deg, #2d0a1a, #fb6f92);
-            border: 1.5px solid var(--silver); border-radius: 50px; padding: 10px 20px;
+            background: var(--pink-gradient); border-radius: 50px; padding: 10px 20px;
             display: none; align-items: center; gap: 12px; z-index: 10000; cursor: pointer;
-            backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); transition: 0.4s;
         }
 
-        .note-icon { font-size: 20px; animation: rotating 3s infinite linear; display: inline-block; color: var(--pink); }
+        .note-icon { font-size: 20px; animation: rotating 3s infinite linear; display: inline-block; }
         @keyframes rotating { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         .cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-bottom: 30px; perspective: 1000px; }
@@ -145,69 +121,51 @@
         .card-front, .card-back {
             position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
             border-radius: 20px; display: flex; align-items: center; justify-content: center;
-            padding: 12px; border: 1.5px solid rgba(255, 255, 255, 0.5); text-align: center; overflow: hidden;
+            padding: 12px; text-align: center; overflow: hidden;
         }
-        .card-front { 
-            background: var(--pink-gradient); color: white; font-size: 15px; font-weight: 800; 
-            box-shadow: 0 0 15px rgba(251, 111, 146, 0.3);
-        }
-        /* كسر لون الكروت الخلفية بالذهبي */
-        .card-back { 
-            background: rgba(0, 0, 0, 0.85); transform: rotateY(180deg); color: var(--gold); font-size: 13px; font-weight: 700; 
-            border: 1.5px solid var(--gold); line-height: 1.4; 
-        }
+        /* توحيد شكل الكروت */
+        .card-front { background: var(--pink-gradient); color: white; font-size: 14px; font-weight: 800; border: 1px solid rgba(255,255,255,0.2); }
+        .card-back { background: rgba(255,255,255,0.95); transform: rotateY(180deg); color: var(--main); font-size: 13px; font-weight: 700; border: 1px solid var(--pink); }
 
-        .love-divider { font-family: 'Dancing Script', cursive; font-size: 45px; color: var(--pink); margin: 25px 0; text-shadow: 0 0 10px rgba(251, 111, 146, 0.8); }
+        .love-divider { font-family: 'Dancing Script', cursive; font-size: 45px; color: var(--pink); margin: 25px 0; }
 
-        .photo-item { background: var(--glass); border-radius: 25px; padding: 12px; margin-bottom: 30px; border: 1px solid rgba(255, 143, 171, 0.2); }
+        .photo-item { background: rgba(255,255,255,0.03); border-radius: 25px; padding: 12px; margin-bottom: 30px; border: 1px solid rgba(255, 255, 255, 0.1); }
         .photo-item img { width: 100%; border-radius: 20px; }
 
         #typewriter { line-height: 1.9; font-size: 18px; color: #fff; text-align: right; }
         .cursor::after { content: '|'; animation: blink 1s infinite; color: var(--pink); }
 
-        #backBtn, .music-control-fixed { position: fixed; z-index: 100; background: var(--glass); border: 1px solid var(--pink); color: var(--pink); width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: 0.3s; }
+        #backBtn, .music-control-fixed { position: fixed; z-index: 100; background: rgba(255,255,255,0.1); border: 1px solid var(--pink); color: var(--pink); width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; }
         #backBtn { top: 20px; right: 20px; }
-        
-        /* تعديل أيقونة الموسيقى لإضافة الشرطة */
         .music-control-fixed { top: 20px; left: 20px; overflow: hidden; }
-        .music-control-fixed.muted::after {
-            content: ''; position: absolute; width: 100%; height: 2px; background: var(--pink);
-            transform: rotate(-45deg); top: 50%; left: 0;
-        }
+        .music-control-fixed.muted::after { content: ''; position: absolute; width: 100%; height: 2px; background: var(--pink); transform: rotate(-45deg); }
 
         .falling-flower { position: fixed; font-size: 28px; z-index: 999; pointer-events: none; animation: fall linear forwards; color: var(--pink); }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
         
         .fancy-trigger-btn {
-            background: var(--gold-gradient) !important;
-            color: #1a050d !important;
-            border: 1.5px solid #fff !important;
+            background: var(--btn-gradient) !important;
+            color: var(--main) !important;
             padding: 15px 40px !important;
-            border-radius: 30px;
-            font-weight: 800; font-size: 16px; cursor: pointer; transition: 0.4s;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            margin: 20px 5px !important; outline: none;
+            border-radius: 30px; border: none;
+            font-weight: 800; font-size: 16px; cursor: pointer;
+            margin: 20px 5px !important;
         }
 
         .royal-flower-btn {
-            position: relative;
-            background: var(--pink-gradient) !important;
-            border: 2px solid #fff !important;
-            color: #fff !important;
+            background: var(--btn-gradient) !important;
+            color: var(--main) !important;
             padding: 12px 35px !important;
-            border-radius: 50px;
-            font-weight: 800; font-size: 16px; letter-spacing: 1px; cursor: pointer;
-            transition: all 0.5s;
-            box-shadow: 0 5px 25px rgba(255, 143, 171, 0.4);
+            border-radius: 50px; border: none;
+            font-weight: 800; font-size: 16px; cursor: pointer;
             margin-top: 30px !important; display: inline-block;
         }
 
         .whatsapp-bubble {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
-            border: 1px solid var(--gold);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 20px; border-radius: 20px; border-bottom-right-radius: 5px;
-            position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             max-width: 90%; text-align: right; margin: 0 auto;
         }
     </style>
@@ -228,14 +186,14 @@
 
     <div id="footerPlayer" class="music-player-fixed" onclick="toggleM()">
         <span class="note-icon" id="fNote">🎵</span>
-        <span id="fStatus" style="font-size: 13px; font-weight: bold; color: #eee;">شغلي الاغنية🤨</span>
+        <span id="fStatus" style="font-size: 13px; font-weight: bold; color: #fff;">شغلي الاغنية🤨</span>
         <div style="width:28px;height:28px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#1a050d;" id="fCircle">▶</div>
     </div>
 
     <div id="msgOverlay" class="msg-overlay" onclick="closeMagicLetter()"></div>
     <div id="msgBox" class="custom-msg-box" onclick="closeMagicLetter()">
-        <p id="msgText" style="font-size: 20px; font-weight: bold; line-height: 1.6;"></p>
-        <div style="margin-top:15px; color:var(--gold); font-size:12px;">إخفاء</div>
+        <p id="msgText" style="font-size: 18px; font-weight: bold; line-height: 1.6; color: white;"></p>
+        <div style="margin-top:15px; color:var(--pink); font-size:12px;">إخفاء</div>
     </div>
 
     <audio id="audio" loop><source src="m.mp3" type="audio/mpeg"></audio>
@@ -250,8 +208,8 @@
     </section>
 
     <section id="p2" style="justify-content: flex-start; padding-top: 100px; padding-bottom: 100px;">
-        <div class="glass-box" style="padding: 25px 15px;">
-            <h3 style="color: var(--gold); font-weight: 800; margin-bottom: 25px;"> Surprise 👀</h3>
+        <div class="glass-box">
+            <h3 style="color: var(--pink); font-weight: 800; margin-bottom: 25px;"> Surprise 👀</h3>
             <div class="cards-container">
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="card-front">دوسي متخافيش..😂</div>
@@ -262,27 +220,26 @@
                     <div class="card-back">24/6/24<br>كانت اول لحظه نشوف بعض فيها فاكراها!.. 😍</div>
                 </div>
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-front" style="background: var(--gold-gradient); color: #1a050d;">دوسي بقا🤨</div>
-                    <div class="card-back" style="border-color: var(--pink); color: var(--pink);">بحبك ي غباء..😂</div>
+                    <div class="card-front">دوسي بقا🤨</div>
+                    <div class="card-back">بحبك ي غباء..😂</div>
                 </div>
                 <div class="flip-card" onclick="handleVoiceRecord('recVoice', this)">
                     <div class="card-front">دوسي لو حابه تسمعي🙃</div>
                     <div class="card-back" style="flex-direction: column;">
-                        <div class="pulse-heart" style="color: var(--pink);">❤️</div>
                         <p style="margin:0; font-size: 12px; color: var(--pink);">سيديهات دي👀😂</p>
                         <audio id="recVoice"><source src="mk.mp3" type="audio/mpeg"></audio>
                     </div>
                 </div>
             </div>
             <div class="love-divider">Love</div>
-            <h3 style="color: var(--gold); font-weight: 800;">حكايتنا بدأت من..</h3>
+            <h3 style="color: var(--pink); font-weight: 800;">حكايتنا بدأت من..</h3>
             <div class="timer-grid">
                 <div class="time-card"><span id="dd">0</span><label>يوم</label></div>
                 <div class="time-card"><span id="hh">0</span><label>ساعة</label></div>
                 <div class="time-card"><span id="mm">0</span><label>دقيقة</label></div>
                 <div class="time-card"><span id="ss">0</span><label>ثانية</label></div>
             </div>
-            <div style="background: var(--gold); color: #000; padding: 5px 20px; border-radius: 20px; font-weight: 800; display: inline-block; margin-bottom: 20px;">14-04-2023</div>
+            <div style="background: var(--pink); color: #fff; padding: 5px 20px; border-radius: 20px; font-weight: 800; display: inline-block; margin-bottom: 20px;">14-04-2023</div>
             <br>
             <button class="fancy-trigger-btn" onclick="showPage('p3')">لحظات عشناها سوا..🫵🏻</button>
         </div>
@@ -315,33 +272,29 @@
         <h2 style="color: var(--pink); font-weight: 800; margin-bottom: 30px;">فيه احلى من كده👀</h2>
         <div class="photo-list" style="width: 100%; max-width: 400px;">
             <div class="photo-item"><img src="m1"><p>أول مره اشوف القمر فيها💓</p></div>
-            <div class="photo-item" style="border-color: var(--gold);"><img src="m2"><p style="color: var(--gold);">البدايات اللي منسيتهاش 💕</p></div>
+            <div class="photo-item"><img src="m2"><p>البدايات اللي منسيتهاش 💕</p></div>
             <div class="photo-item"><img src="m3"><p>الصورة دي ف قلبي👀💓</p></div>
-            <div class="photo-item" style="border-color: var(--gold);"><img src="m4"><p style="color: var(--gold);">كل تفصيلة معاكي بتفرق👑</p></div>
+            <div class="photo-item"><img src="m4"><p>كل تفصيلة معاكي بتفرق👑</p></div>
             <div class="photo-item"><img src="m5"><p>النظرات وكده😂👀</p></div>
         </div>
         <button class="fancy-trigger-btn" onclick="startFinalPage()">مفاجأه هنا🫣</button>
     </section>
 
     <section id="p4" style="padding-bottom: 120px;">
-        <h2 style="color: var(--gold); font-weight: 800; margin-bottom: 20px;">الكلام ده ليكي بقا👀</h2>
-        <div class="glass-box" style="border: 2px dashed var(--gold); min-height: 250px; background: rgba(0,0,0,0.4);">
+        <h2 style="color: var(--pink); font-weight: 800; margin-bottom: 20px;">الكلام ده ليكي بقا👀</h2>
+        <div class="glass-box" style="border: 2px dashed var(--pink); min-height: 250px;">
             <div id="typewriter" class="cursor"></div>
         </div>
         
         <div class="whatsapp-bubble-container" style="margin-top: 30px; width: 100%;">
             <div class="whatsapp-bubble">
-                <h4 style="margin:0 0 10px 0; color:var(--gold); font-weight: 800; font-size: 14px;">باقي على الفرحة المنتظره ان شاء الله 🫣💍</h4>
+                <h4 style="margin:0 0 10px 0; color:var(--pink); font-weight: 800; font-size: 14px;">باقي على الفرحة المنتظره ان شاء الله 💍</h4>
                 <div id="engagement-timer" style="font-size: 18px; font-weight:800; color: #fff;"></div>
             </div>
         </div>
         
         <button class="royal-flower-btn" onclick="giveFlower()">
-            <span class="btn-content">
-                <span class="flower-icon">🌸</span>
-                خدي وردة يا وردة 
-                <span class="flower-icon">🌸</span>
-            </span>
+            خدي وردة يا وردة 🌸
         </button>
     </section>
 
