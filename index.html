@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕love MaB💕</title>
+    <title>love MaB </title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --main: #4a0404; --gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); --light-pink: #ffb6c1; --silver-glass: rgba(192, 192, 192, 0.15); --violet-pink: linear-gradient(135deg, rgba(255, 20, 147, 0.4), rgba(138, 43, 226, 0.4)); }
@@ -76,6 +76,7 @@
         .story-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         .story-date-tag { font-size: 11px; margin-top: 8px; color: var(--gold); font-weight: 700; opacity: 0.9; }
         
+        /* مشغل الصور والفيديو */
         .story-viewer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 20000; display: none;
@@ -83,7 +84,7 @@
         }
         .story-viewer.active { display: flex; animation: fadeIn 0.3s; }
         .view-content { width: 90%; max-width: 400px; position: relative; }
-        .view-content img { width: 100%; border-radius: 20px; border: 2px solid var(--gold); box-shadow: 0 0 30px var(--gold); }
+        .view-content img, .view-content video { width: 100%; border-radius: 20px; border: 2px solid var(--gold); box-shadow: 0 0 30px var(--gold); }
         .close-view { position: absolute; top: -50px; right: 0; font-size: 30px; color: white; cursor: pointer; }
 
         .custom-msg-box {
@@ -203,7 +204,7 @@
         .btn-content { display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 2; position: relative; }
         .flower-icon { font-size: 18px; animation: rotateFlower 4s infinite linear; }
         @keyframes rotateFlower { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, transparent 70%); transform: translate(-50%, -50) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
+        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, transparent 70%); transform: translate(-50%, -50%) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
         .royal-flower-btn:hover { transform: translateY(-3px) scale(1.03); border-color: #ffb6c1 !important; box-shadow: 0 10px 35px rgba(255, 182, 193, 0.7); }
         .royal-flower-btn:hover .btn-glow { opacity: 1; animation: sweep 2s infinite linear; }
         @keyframes sweep { 0% { transform: translate(-150%, -50%) rotate(45deg); } 100% { transform: translate(50%, -50%) rotate(45deg); } }
@@ -276,7 +277,8 @@
     <div id="storyViewer" class="story-viewer" onclick="closeStory()">
         <div class="view-content">
             <span class="close-view">&times;</span>
-            <img id="viewImg" src="">
+            <img id="viewImg" src="" style="display:none;">
+            <video id="viewVid" controls style="display:none;"></video>
         </div>
     </div>
 
@@ -307,22 +309,30 @@
         <div class="glass-box" style="padding: 25px 15px;">
             <h3 style="color: var(--gold); font-weight: 800; margin-bottom: 25px;"> Surprise 👀</h3>
             <div class="cards-container">
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-front">دوسي متخافيش..😂</div>
+                <div class="flip-card" onclick="openFullVideo('v1.mp4')">
+                    <div class="card-front" style="padding:0; overflow:hidden;">
+                        <video muted loop autoplay style="width:100%; height:100%; object-fit:cover; opacity:0.6;">
+                            <source src="v1.mp4" type="video/mp4">
+                        </video>
+                        <div style="position:absolute; font-weight:800; text-shadow: 0 0 10px #000;">دوسي متخافيش..😂</div>
+                    </div>
                     <div class="card-back">ع فكره مش بحب اشوفك زعلانه!</div>
                 </div>
+
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="card-front">فاكرة اول يوم اتقابلنا!..</div>
                     <div class="card-back">24/6/24<br>كانت اول لحظه نشوف بعض فيها فاكراها!.. 😍</div>
                 </div>
+
                 <div class="flip-card" onclick="handleVoiceRecord('recVoice2', this)">
-                    <div class="card-front">زعلانه مني🤨</div>
+                    <div class="card-front">دوسي بقا🤨</div>
                     <div class="card-back" style="flex-direction: column;">
-                        <div class="pulse-heart">😍</div>
-                        <p style="margin:0; font-size: 12px; color: var(--gold);">متزعليش يعسولتي..😂🥲</p>
+                        <div class="pulse-heart">❤️</div>
+                        <p style="margin:0; font-size: 12px; color: var(--gold);">بحبك ي غباء..😂</p>
                         <audio id="recVoice2"><source src="mkk.mp3" type="audio/mpeg"></audio>
                     </div>
                 </div>
+
                 <div class="flip-card" onclick="handleVoiceRecord('recVoice', this)">
                     <div class="card-front">دوسي لو حابه تسمعي🙃</div>
                     <div class="card-back" style="flex-direction: column;">
@@ -527,6 +537,41 @@
             }
         }
 
+        function openFullVideo(src) {
+            const viewer = document.getElementById('storyViewer');
+            const vid = document.getElementById('viewVid');
+            const mainAudio = document.getElementById('audio');
+            
+            // إيقاف الموسيقى الخلفية مؤقتاً
+            if (!mainAudio.paused) { mainAudio.pause(); mainAudio.wasPlaying = true; }
+
+            document.getElementById('viewImg').style.display = 'none';
+            vid.style.display = 'block';
+            vid.src = src;
+            viewer.classList.add('active');
+            vid.play();
+        }
+
+        function openStory(img) {
+            document.getElementById('viewVid').style.display = 'none';
+            document.getElementById('viewImg').style.display = 'block';
+            document.getElementById('viewImg').src = img;
+            document.getElementById('storyViewer').classList.add('active');
+        }
+
+        function closeStory() {
+            const viewer = document.getElementById('storyViewer');
+            const vid = document.getElementById('viewVid');
+            const mainAudio = document.getElementById('audio');
+            
+            vid.pause();
+            vid.src = "";
+            viewer.classList.remove('active');
+            
+            // استئناف الموسيقى الخلفية
+            if (mainAudio.wasPlaying) mainAudio.play();
+        }
+
         function openMagicLetter() {
             const randomMsg = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
             document.getElementById('msgText').innerText = randomMsg;
@@ -555,14 +600,6 @@
                 setTimeout(() => { k.style.transform = `translateY(-110vh) rotate(${Math.random()*360}deg)`; k.style.opacity = '0'; }, 50);
                 setTimeout(() => k.remove(), 3000);
             }
-        }
-
-        function openStory(img) {
-            document.getElementById('viewImg').src = img;
-            document.getElementById('storyViewer').classList.add('active');
-        }
-        function closeStory() {
-            document.getElementById('storyViewer').classList.remove('active');
         }
     </script>
 </body>
