@@ -57,7 +57,6 @@
             100% { transform: scale(1) translateY(0); box-shadow: 0 0 15px rgba(255, 20, 147, 0.3); }
         }
 
-        /* --- قسم الاستوريهات الجديد --- */
         .stories-container {
             display: flex; justify-content: center; gap: 15px; margin: 20px 0 40px 0;
             padding: 10px; overflow-x: auto; scrollbar-width: none;
@@ -181,14 +180,12 @@
             animation: smooth-pulse 2.5s infinite ease-in-out;
         }
 
-        /* --- تصميم زرار الوردة الملكي الفخم - تم التعديل لتصغير الحجم وزيادة التوهج --- */
         .royal-flower-btn {
             position: relative;
             background: rgba(255, 182, 193, 0.15) !important;
             backdrop-filter: blur(15px);
             border: 2px solid rgba(255, 182, 193, 0.5) !important;
             color: #fff !important;
-            /* تم تصغير الـ padding والخط حاجة بسيطة */
             padding: 12px 35px !important;
             border-radius: 50px;
             font-weight: 800;
@@ -197,32 +194,27 @@
             cursor: pointer;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            /* زيادة التوهج الافتراضي */
             box-shadow: 0 5px 25px rgba(255, 182, 193, 0.4);
             margin-top: 30px !important;
             display: inline-block;
             z-index: 1;
-            /* تم زيادة قوة التوهج في الأنيميشن */
             animation: royal-pulse-intense 2s infinite ease-in-out;
         }
         .btn-content { display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 2; position: relative; }
         .flower-icon { font-size: 18px; animation: rotateFlower 4s infinite linear; }
         @keyframes rotateFlower { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, transparent 70%); transform: translate(-50%, -50%) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
+        .btn-glow { position: absolute; top: 50%; left: 50%; width: 150%; height: 300%; background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, transparent 70%); transform: translate(-50%, -50) rotate(45deg); transition: 0.8s; opacity: 0; z-index: -1; }
         .royal-flower-btn:hover { transform: translateY(-3px) scale(1.03); border-color: #ffb6c1 !important; box-shadow: 0 10px 35px rgba(255, 182, 193, 0.7); }
         .royal-flower-btn:hover .btn-glow { opacity: 1; animation: sweep 2s infinite linear; }
         @keyframes sweep { 0% { transform: translate(-150%, -50%) rotate(45deg); } 100% { transform: translate(50%, -50%) rotate(45deg); } }
-        /* أنيميشن نبض أكثر توهجاً */
         @keyframes royal-pulse-intense { 0% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.4); } 50% { box-shadow: 0 0 40px rgba(255, 182, 193, 0.8); } 100% { box-shadow: 0 0 15px rgba(255, 182, 193, 0.4); } }
 
-        /* --- استايل فقاعة شات الواتس البريميوم للعداد --- */
         .whatsapp-bubble-container {
             position: relative;
             margin-top: 25px;
-            /* إزاحة خفيفة جهة اليمين */
             padding-right: 15px;
             display: flex;
-            justify-content: flex-start; /* ليكون السهم جهة اليسار */
+            justify-content: flex-start; 
             width: 100%;
         }
 
@@ -232,7 +224,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 20px;
-            /* تدوير الزاوية جهة اليسار السفلية لتبدو كفقاعة مستلمة */
             border-bottom-right-radius: 5px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -241,24 +232,20 @@
             animation: bubbleFadeIn 0.5s ease-out;
         }
 
-        /* مثلث فقاعة الشات (السهم) */
         .whatsapp-bubble::before {
             content: '';
             position: absolute;
             bottom: 0;
-            right: -10px; /* مكان السهم جهة اليمين */
+            right: -10px; 
             width: 0;
             height: 0;
             border-style: solid;
-            /* شكل السهم */
             border-width: 15px 0 0 15px;
             border-color: transparent transparent transparent rgba(255, 255, 255, 0.08);
-            /* ليتناسب مع الـ backdrop-filter نستخدم طريقة بديلة للسهم الزجاجي */
             filter: blur(0.5px);
             transform: translateY(1px);
         }
         
-        /* طبقة إضافية لتأثير الزجاج على السهم */
         .whatsapp-bubble::after {
             content: '';
             position: absolute;
@@ -328,9 +315,13 @@
                     <div class="card-front">فاكرة اول يوم اتقابلنا!..</div>
                     <div class="card-back">24/6/24<br>كانت اول لحظه نشوف بعض فيها فاكراها!.. 😍</div>
                 </div>
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card" onclick="handleVoiceRecord('recVoice2', this)">
                     <div class="card-front">دوسي بقا🤨</div>
-                    <div class="card-back">بحبك ي غباء..😂</div>
+                    <div class="card-back" style="flex-direction: column;">
+                        <div class="pulse-heart">❤️</div>
+                        <p style="margin:0; font-size: 12px; color: var(--gold);">بحبك ي غباء..😂</p>
+                        <audio id="recVoice2"><source src="mkk.mp3" type="audio/mpeg"></audio>
+                    </div>
                 </div>
                 <div class="flip-card" onclick="handleVoiceRecord('recVoice', this)">
                     <div class="card-front">دوسي لو حابه تسمعي🙃</div>
@@ -576,3 +567,4 @@
     </script>
 </body>
 </html>
+
