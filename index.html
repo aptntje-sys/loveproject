@@ -76,7 +76,6 @@
         .story-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         .story-date-tag { font-size: 11px; margin-top: 8px; color: var(--gold); font-weight: 700; opacity: 0.9; }
         
-        /* مشغل الصور والفيديو */
         .story-viewer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 20000; display: none;
@@ -311,10 +310,10 @@
             <div class="cards-container">
                 <div class="flip-card" onclick="openFullVideo('v1.mp4')">
                     <div class="card-front" style="padding:0; overflow:hidden;">
-                        <video muted loop autoplay style="width:100%; height:100%; object-fit:cover; opacity:0.6;">
+                        <video id="teaserVideo" muted autoplay playsinline style="width:100%; height:100%; object-fit:cover; opacity:0.7;">
                             <source src="v1.mp4" type="video/mp4">
                         </video>
-                        <div style="position:absolute; font-weight:800; text-shadow: 0 0 10px #000;">دوسي متخافيش..😂</div>
+                        <div style="position:absolute; font-weight:800; text-shadow: 0 0 10px #000; bottom: 10px; width: 100%;">دوسي متخافيش..😂</div>
                     </div>
                     <div class="card-back">ع فكره مش بحب اشوفك زعلانه!</div>
                 </div>
@@ -430,6 +429,14 @@
             "مهما قولت كلام مش هيكفي يوصف حبي ليكي يا مزتي 🫣", "أنتي الوحيدة اللي بتعرفي تخليني أضحك من قلبي بجد 💓"
         ];
 
+        // منطق الفيديو التشويقي (أول 3 ثواني)
+        const teaserVid = document.getElementById('teaserVideo');
+        teaserVid.addEventListener('timeupdate', function() {
+            if (this.currentTime >= 3) {
+                this.currentTime = 0;
+            }
+        });
+
         function createElements() {
             for(let i=0; i<40; i++) {
                 const s = document.createElement('div');
@@ -453,7 +460,7 @@
         createElements();
 
         function checkPw() {
-            if(document.getElementById('pw').value === 'm123') {
+            if(document.getElementById('pw').value === 'm13') {
                 showPage('p2'); 
                 document.getElementById('audio').play();
                 document.getElementById('mBtnFixed').style.display = 'flex';
@@ -542,12 +549,12 @@
             const vid = document.getElementById('viewVid');
             const mainAudio = document.getElementById('audio');
             
-            // إيقاف الموسيقى الخلفية مؤقتاً
             if (!mainAudio.paused) { mainAudio.pause(); mainAudio.wasPlaying = true; }
 
             document.getElementById('viewImg').style.display = 'none';
             vid.style.display = 'block';
             vid.src = src;
+            vid.currentTime = 0; // يبدأ من الأول دايماً
             viewer.classList.add('active');
             vid.play();
         }
@@ -568,7 +575,6 @@
             vid.src = "";
             viewer.classList.remove('active');
             
-            // استئناف الموسيقى الخلفية
             if (mainAudio.wasPlaying) mainAudio.play();
         }
 
